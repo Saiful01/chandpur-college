@@ -1,0 +1,187 @@
+@font-face {
+    font-family: 'bnFont'; /*a name to be used later*/
+    src: url(../fonts/KongshoMJ.ttf); /*URL to font*/
+}
+a {
+    color: #0D724D;
+    text-decoration: none;
+}
+section {
+    padding: 50px 0px;
+}
+
+.title-area {
+    padding: 10px 0px;
+    margin: 10px 0px;
+    background: #0D724D;
+    color: #ffffff;
+}
+
+p, h1, h2, h3, h4, h5, h6, td {
+    font-family: 'bnFont';
+    padding: 0px;
+    margin: 0px;
+}
+
+.hero-left {
+    background-image: url("../img/bg.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.countdown-section .left {
+    background-image: url("../img/bg.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.countdown-section .right {
+    background-image: url("../img/bg.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.item {
+    background: #fff;
+    padding: 15px 35px;
+    border-radius: 5px;
+}
+
+.odd {
+    margin-top: 100px;
+}
+.registration-step {
+    margin-top: 45px;
+}
+.registration-step .number {
+    background: #0D724D;
+    color: #ffffff;
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    padding-top: 7px;
+}
+.registration-step .list-inline{
+    text-align: center;
+}
+.form-control {
+    padding: 16px 15px;
+    border-radius: 0px;
+    border: 1px solid #0d724d;
+}
+.form-select {
+    padding: 16px 15px;
+    border-radius: 0px;
+    border: 1px solid #0d724d;
+}
+.form-area .card-body{
+    padding: 75px;
+    background: #f1f1f1;
+    border: none;
+}
+.card{
+    border: none;
+}
+.btn-warning{
+    background: #F59530;
+    border: 1px solid #F59530;
+    color: #ffffff;
+    border-radius: 0px;
+    padding: 10px 15px;
+}
+
+.faq-item {
+    margin: 7px 0px;
+}
+
+.faq-title {
+    padding: 10px 20px;
+    background: #0D724D;
+    color: #ffffff;
+}
+.footer-section{
+    background-image: url("../img/mp_bg.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+.invitation{
+    background-image: url("../img/confirm_bg.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+.bordered-text{
+    border: 1px dotted white;
+    width: auto;
+    padding: 10px 15px;
+}
+.footer-bottom{
+    border-top: 1px solid white;
+}
+.next-icon {
+    margin-left: 25px;
+    font-size: 21px;
+    color: #0D724D;
+}
+.registration-step .active {
+    background: #F59530;
+
+}
+.reg-p-active {
+    color: #F59530;
+
+}
+.registration-step p{
+    margin-top: 15px;
+}
+.checkbox-form{
+    padding: 15px 10px;
+    border: 1px solid #0d724d;
+    margin: 10px;
+    width: 96%;
+}
+
+.nav-link {
+    font-weight: bold;
+    color: #0D724D;
+}
+.nav-item{
+    padding: 0px 20px;
+    font-size: 20px;
+}
+.btn-register{
+    font-size: 20px;
+    padding: 10px 31px;
+    line-height: 30px;
+}
+.h4, h4 {
+    font-size: 1.5rem;
+    line-height: 35px;
+}
+.form-select {
+    color: #0d724d;
+}
+.btn-more{
+    border-radius: 1px;
+    float: right;
+    border: 1px solid #0d724d;
+}
+.info-text{
+    border: 1px dotted #f59530;
+    padding: 10px 15px;
+    border-radius: 10px;
+    width: 96%;
+}
+
+.invitation p{
+    font-size: 20px;
+}
+
+.invitation td{
+    color: #fff;
+    font-size: 22px;
+}
