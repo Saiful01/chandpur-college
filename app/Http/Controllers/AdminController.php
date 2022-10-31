@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 
+use App\Models\Payment;
 use App\Models\Student;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -56,7 +57,7 @@ class AdminController extends Controller
 
     public function student()
     {
-        return Student::with("academicQualification", "profession", "guest", "gift")->get();
+         Student::with("academicQualification", "profession", "guest", "gift",'payment')->get();
         return Redirect::to("/login");
     }
 
@@ -64,5 +65,10 @@ class AdminController extends Controller
     {
         Auth::logout();
         return Redirect::to("/login");
+    }
+
+    public function paymentData()
+    {
+       return Payment::orderBy("created_at","DESC")->get();
     }
 }

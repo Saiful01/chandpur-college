@@ -6,6 +6,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\SslCommerzPaymentController;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -37,6 +38,9 @@ Route::group(['middleware' => 'admin'], function () {
 
 
     Route::get('/students', [AdminController::class, 'student']);
+
+
+    Route::get('/payment', [AdminController::class, 'paymentData']);
 });
 
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
@@ -92,3 +96,15 @@ Route::post('/ipn', [SslCommerzPaymentController::class, 'ipn']);
 Route::any('/download', [Controller::class, 'pdf']);
 
 Route::get('/mail', [Controller::class, 'mail']);
+Route::get('/test', [Controller::class, 'test']);
+
+Route::get('/clear', function () {
+
+    Artisan::call('cache:clear');
+    Artisan::call('config:clear');
+    Artisan::call('config:cache');
+    Artisan::call('view:clear');
+
+    return "Cleared!";
+
+});

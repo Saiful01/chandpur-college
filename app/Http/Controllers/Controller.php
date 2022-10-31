@@ -1,11 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Support\Facades\Mail;
+
 use App\Library\SslCommerz\SslCommerzNotification;
 use App\Models\AcademicQualification;
 use App\Models\GiftDelivery;
 use App\Models\GuestInfo;
+use App\Models\Payment;
 use App\Models\Post;
 use App\Models\ProfessionalExperinece;
 use App\Models\Student;
@@ -16,6 +17,8 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -105,7 +108,7 @@ class Controller extends BaseController
             $request['registration_id'] = uniqid();
             $request['created_at'] = Carbon::now();
             $request['updated_at'] = Carbon::now();
-            $request['Student_type']= 2;
+            $request['Student_type'] = 2;
             try {
                 $student_id = Student::insertGetId($request->except("_token", "image"));
                 Session::put("student_id", $student_id);
@@ -184,12 +187,10 @@ class Controller extends BaseController
             //return $request->all();
 
             try {
-                if(implode(null,$request['guest_name'])==null){
+                if (implode(null, $request['guest_name']) == null) {
                     return Redirect::to("/student/gift-info");
                 }
-               // return $request->all();
-
-
+                // return $request->all();
 
 
                 $i = 0;
@@ -225,7 +226,7 @@ class Controller extends BaseController
         }
 
         if ($request->isMethod("POST")) {
-           // return $request->all();
+            // return $request->all();
             try {
                 GiftDelivery::create($request->except("_token", "image"));
                 Alert::success("Success", "Successfully Created");
@@ -259,11 +260,10 @@ class Controller extends BaseController
         }*/
 
         $guest = GuestInfo::where('student_id', Session::get('student_id'))->count();
-        $fee_exist= GiftDelivery::where('student_id', Session::get("student_id") )->first()->delivery_type;
+        $fee_exist = GiftDelivery::where('student_id', Session::get("student_id"))->first()->delivery_type;
         if ($fee_exist == "বর্তমান ঠিকানা") {
             $delivery_fee = 150;
-        }
-        else{
+        } else {
             $delivery_fee = 0;
 
         }
@@ -306,18 +306,32 @@ class Controller extends BaseController
 
     public function invitationInfo(Request $request)
     {
-       // return $request->all();
+        //return $request->all();
         if (Session::get("student_id") == null) {
             return Redirect::to("/student/personal-info");
         }
 
 
-
-       // echo "Transaction is Successful";
+        // echo "Transaction is Successful";
 
         $tran_id = $request->input('tran_id');
         $amount = $request->input('amount');
         $currency = $request->input('currency');
+        $student_id = $request->input('value_a');
+
+        $array = [
+            'student_id' => $student_id,
+            'tran_id' => $tran_id,
+            'amount' => $amount,
+            'ssl_data' => json_encode($request->all()),
+        ];
+
+        try {
+            Payment::create($array);
+        } catch (\Exception $exception) {
+
+            return $exception->getMessage();
+        }
 
         $sslc = new SslCommerzNotification();
 
@@ -347,10 +361,63 @@ class Controller extends BaseController
 
 
         $student = Student::where('id', Session::get("student_id"))->first();
-        if ($request['value_a'] == "current"){
+
+
+        if ($request['value_a'] == "current") {
             return view("frontend.current_student.invitation-info")
                 ->with("student", $student);
-        }else{
+        } else {
+
+            $invoice = uniqid();
+            $data = [
+                'invoice' => $invoice,
+                'name' => $student->name,
+                'nationality' => $student->nationality,
+                'gender' => $student->gender,
+                'email' => $student->email,
+                'phone' => $student->phone,
+                'address' => $student->address,
+                'birth_date' => $student->birth_date,
+                'blood_group' => $student->blood_group,
+                'father_name' => $student->father_name,
+                'nid_no' => $student->nid_no,
+                'registration_id' => $student->registration_id,
+                't_shirt_size' => $student->t_shirt_size,
+                'education_year' => $student->education_year,
+                'profile_pic' => $student->profile_pic,
+                'subject' => "অংশ হোন ৭৫ বছরের ঐতিহ্যের রেজিস্ট্রেশন ",
+            ];
+            $message = "Thank you. $student->name. Your registration Successful";
+
+            sendSms($student->phone, $message);
+
+            /*       $pdf = Pdf::loadView('ticket', $data);
+                   //return $pdf->stream();
+
+
+                   $pdf->setOption(['dpi' => 150, 'defaultFont' => 'Siyamrupali']);
+
+
+                   $path = public_path('pdf/');
+                   $fileName = $invoice . '.' . 'pdf';
+                   $pdf->loadView($path . '/' . $fileName);
+                   $pdf->save($path . '/' . $fileName);*/
+
+
+            $path = public_path('/pdf/');
+            $fileName = $invoice . '.pdf';
+            if (!File::exists($path)) {
+                File::makeDirectory($path);
+            }
+            Pdf::loadView('ticket', $data)->save($path . '/' . $fileName);
+
+            Mail::send('email-template.confirm', $data, function ($message) use ($data, $invoice) {
+                $message->to($data['email'])
+                    ->subject($data['subject']);
+                $message->from('asad.livingbrands@gmail.com', $data['subject']);
+                $message->attach(public_path() . "/pdf/$invoice.pdf");
+            });
+
             return view("frontend.student.invitation-info")
                 ->with("student", $student);
         }
@@ -441,7 +508,7 @@ class Controller extends BaseController
         $post_data['product_profile'] = "physical-goods";
 
         # OPTIONAL PARAMETERS
-        $post_data['value_a'] = "old";
+        $post_data['value_a'] = Session::get("student_id");
         $post_data['value_b'] = "ref002";
         $post_data['value_c'] = "ref003";
         $post_data['value_d'] = "ref004";
@@ -470,6 +537,7 @@ class Controller extends BaseController
         }
 
     }
+
     public function CurrentPayment(Request $request, $amount)
 
     {
@@ -571,10 +639,12 @@ class Controller extends BaseController
         /* $pdf = Pdf::loadView('pdf.invoice', $data);
          return $pdf->download('invoice.pdf');*/
 
+
     }
-    
+
     public function mail()
     {
+
 
         /*$data = array(
             'invoice' => uniqid(),
@@ -601,11 +671,11 @@ class Controller extends BaseController
             'invoice' => uniqid(),
             'full_name' => "Motiur Rahaman",
             'phone_number' => "017178499658",
-           
+
             'date' => Carbon::now(),
             'url' => \url("/"),
         );
-        $visitor_email = "memotiur@gmail.com";
+        $visitor_email = "saiful013101@gmail.com";
 
         try {
             Mail::send('email-template/confirm', $data, function ($message) use ($visitor_email) {
@@ -613,7 +683,7 @@ class Controller extends BaseController
                     ->subject('পাঠক উৎসব টিকেট');
                 $message->from('motiur@gmail.com', 'পাঠক উৎসব ');
 
-               // $message->attach(public_path() . "/ticket/6357ffc4a07d8.jpeg");
+                // $message->attach(public_path() . "/ticket/6357ffc4a07d8.jpeg");
 
             });
         } catch (\Exception $exception) {
@@ -622,5 +692,14 @@ class Controller extends BaseController
 
 
         return "mail";
+    }
+
+    public function test()
+    {
+
+        // return;
+
+
+        return view("test");
     }
 }

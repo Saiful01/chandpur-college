@@ -8,7 +8,6 @@ use App\Models\Leave;
 use App\Models\LoginHistory;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Crypt;
-use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 
 
@@ -130,32 +129,51 @@ function getCopyright()
 {
     return "Qubit Solution Lab";
 }
+
 function getDeliveryfee()
 {
     if (Session::get("student_id") != null) {
-       $student= GiftDelivery::where('student_id', Session::get("student_id") )->first()->delivery_type;
-       if ($student == "বর্তমান ঠিকানা") {
-           return 1;
-       }
-       return 2;
+        $student = GiftDelivery::where('student_id', Session::get("student_id"))->first()->delivery_type;
+        if ($student == "বর্তমান ঠিকানা") {
+            return 1;
+        }
+        return 2;
     }
     return 2;
 }
+
 function getCopyrightUrl()
 {
     return "Qubit Solution Lab";
 }
+
 function getOldStudentFee()
 {
     return "2000";
 }
+
 function getCurrentStudentFee()
 {
     return "1000";
 }
+
 function getGuestFee()
 {
     return "1000";
+}
+
+function sendSms($number, $message)
+{
+
+
+    $url = "https://smsc.ekshop.gov.bd/externalApi?passkey=09978bg45SD3SWQ&smsText=" . $message . "&client=motiur&number=" . $number;
+
+    $client = new GuzzleHttp\Client();
+    $res = $client->get($url);
+    return $res->getStatusCode();
+    return $url;
+
+
 }
 
 
@@ -180,9 +198,10 @@ function isImage($image_file)
     }
     return 3;
 }
+
 function postDetailsFormat($post)
 {
-    return  Str::limit(strip_tags($post), 150, '...') ;
+    return Str::limit(strip_tags($post), 150, '...');
 }
 
 ?>

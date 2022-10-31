@@ -29,5 +29,9 @@ class Student extends Model
     {
         return $this->hasOne(GiftDelivery::class);
     }
+    public function payment()
+    {
+        return $this->belongsTo(Payment::class);
+    }
 
 }
