@@ -13,11 +13,11 @@
     <title>Title</title>
 
     <style>
-        div.page
-        {
+        div.page {
             page-break-after: always;
             page-break-inside: avoid;
         }
+
         @page {
             margin: 0px;
         }
@@ -213,7 +213,7 @@
                 </div>
 
                 <div style="padding-top:0px;"><p class="text-white">
-                        Venue - Chandpur Stadium, Stadium Road, Chandpur.
+                        Venue - Chandpur Government College, Chandpur.
                     </p></div>
 
                 <div style="padding-top:20px;"><h4 class="bordered-text-rul text-white"> Detailed rules</h4></div>
@@ -261,6 +261,7 @@
         </div>
 
     </div>
+</div>
 
 
 </body>

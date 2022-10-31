@@ -21,7 +21,7 @@ class Student extends Model
     {
         return $this->hasOne(ProfessionalExperinece::class);
     }
-    public function guest()
+    public function guests()
     {
         return $this->hasMany(GuestInfo::class);
     }
@@ -31,7 +31,7 @@ class Student extends Model
     }
     public function payment()
     {
-        return $this->belongsTo(Payment::class);
+        return $this->hasOne(Payment::class);
     }
 
 }

@@ -37,7 +37,7 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('/log-out', [AdminController::class, 'logOut']);
 
 
-    Route::get('/students', [AdminController::class, 'student']);
+    Route::get('/all-students', [AdminController::class, 'AllStudent']);
 
 
     Route::get('/payment', [AdminController::class, 'paymentData']);

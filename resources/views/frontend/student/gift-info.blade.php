@@ -59,7 +59,7 @@
                             </div>
                             <p> পারিবারিক সদস্যের তথ্যাবলী
 
-</p>
+                            </p>
                         </a>
                     </li>
                     <li class="list-inline-item">
@@ -157,7 +157,8 @@
                                         <label for="address" class="col-sm-1-12 col-form-label"></label>
                                         <div class="col-sm-1-12">
                                             <input type="text" class="form-control" name="address" id="address"
-                                                   placeholder="5/8 House, Mirpur-1 Dhaka-1216">
+                                                   placeholder="5/8 House, Mirpur-1 Dhaka-1216"
+                                                   value="{{getPresentAddress()}}">
                                         </div>
                                     </div>
                                 </div>

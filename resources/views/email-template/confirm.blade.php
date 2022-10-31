@@ -45,7 +45,7 @@
         <p> Your registration is successful. Please check the attached e-ticket.</p>
 
 
-        <h4><strong>Venue: </strong> Chandpur Stadium, Stadium Road, Chandpur.</h4>
+        <h4><strong>Venue: </strong> Chandpur Government College, Chandpur.</h4>
 
         <h4> Detailed Rules</h4>
 

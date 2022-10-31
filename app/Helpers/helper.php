@@ -6,6 +6,7 @@ use App\Models\GiftDelivery;
 use App\Models\InOutMonitor;
 use App\Models\Leave;
 use App\Models\LoginHistory;
+use App\Models\Student;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Session;
@@ -140,6 +141,16 @@ function getDeliveryfee()
         return 2;
     }
     return 2;
+}
+function getPresentAddress()
+{
+    if (Session::get("student_id") != null) {
+      return  $student = Student::where('id', Session::get("student_id"))->first()->address;
+
+    }else{
+        return "-";
+    }
+
 }
 
 function getCopyrightUrl()

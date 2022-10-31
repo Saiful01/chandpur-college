@@ -118,58 +118,72 @@
 
                 <div class="col-md-8 mx-auto">
 
-                   <center> <div style="padding-top:50px;"><h4 class="bordered-text text-center text-white">আমন্ত্রণ পত্র</h4></div></center>
+                    <center>
+                        <div style="padding-top:50px;"><h4 class="bordered-text text-center text-white">আমন্ত্রণ
+                                পত্র</h4></div>
+                    </center>
 
                     <div style="padding-top:50px;">
-                    <table class="table">
-                        <tr style="">
-                            <td style="color:#FFF; width:30%">নাম</td>
-                            <td style=" background: #FFF;color:#000;width:70%" class="en-font">{{$student->name}}</td>
-                        </tr>
-                        <tr style="position:relative;top:30px;">
-                            <td style="color:#FFF;width:30%">রেজিস্ট্রেশন আইডি:</td>
-                            <td style="background: #FFF;color:#000;width:70%" class="en-font">{{$student->registration_id}}</td>
-                        </tr>
-                        <tr style="position:relative;top:50px;">
-                            <td style="color:#FFF;width:30%">যোগাযোগের নাম্বার:</td>
-                            <td style="background: #FFF;color:#000;width:70%" class="en-font">{{$student->phone}}</td>
-                        </tr>
-                    </table>
+                        <table class="table">
+                            <tr style="">
+                                <td style="color:#FFF; width:30%">নাম</td>
+                                <td style=" background: #FFF;color:#000;width:70%"
+                                    class="en-font">{{$student->name}}</td>
+                            </tr>
+                            <tr style="position:relative;top:30px;">
+                                <td style="color:#FFF;width:30%">রেজিস্ট্রেশন আইডি:</td>
+                                <td style="background: #FFF;color:#000;width:70%"
+                                    class="en-font">{{$student->registration_id}}</td>
+                            </tr>
+                            <tr style="position:relative;top:50px;">
+                                <td style="color:#FFF;width:30%">যোগাযোগের নাম্বার:</td>
+                                <td style="background: #FFF;color:#000;width:70%"
+                                    class="en-font">{{$student->phone}}</td>
+                            </tr>
+                        </table>
                     </div>
 
                     <div style="padding-top:70px;"><p class="text-white">
-                        ভেন্যু - চাঁদপুর স্টেডিয়াম, স্টেডিয়াম রোড ,চাঁদপুর।
-                    </p></div>
+                            ভেন্যু - চাঁদপুর সরকারি কলেজ, চাঁদপুর।
+                        </p></div>
 
-                   <div style="padding-top:50px;"> <h4 class="bordered-text-rul text-white"> বিস্তারিত নিয়মাবলী</h4></div>
+                    <div style="padding-top:50px;"><h4 class="bordered-text-rul text-white"> বিস্তারিত নিয়মাবলী</h4>
+                    </div>
 
                     <div style="padding-top:50px;">
-                    
-                    <ul class="rule">
-                        <li><p class="text-white">
-                            ১.কলেজ শিক্ষার্থী বা তাদের সাথে আগত অতিথিদের অনুষ্ঠানের তিনদিন রেজিস্ট্রেশন কার্ড সাথে রাখা বাধ্যতামূলক। 
-                             রেজিস্ট্রেশন কার্ড ব্যাতিত কোনোভাবেই ভেন্যুতে প্রবেশ করা যাবেনা এবং খাবার সংগ্রহ করা যাবেনা। 
-                            </p></li>
-                        <li><p class="text-white">২.নিরাপত্তা নিশ্চিত করার সুবিধার্থে  আমন্ত্রিত সকল শিক্ষার্থী এবং অতিথিদের রেজিস্ট্রেশন কার্ড সর্বদা দৃশ্যমান রাখতে অনুরোধ করা যাচ্ছে। 
-                            ভলান্টিয়ারগণ যে কোনো মুহূর্তে রেজিস্ট্রেশন কার্ড চেক করতে পারেন।</p></li>
-                        <li><p class="text-white">৩. রেজিস্ট্রেশনই অনুষ্ঠানের ফুড কুপন হিসেবে বিবেচিত হবে। 
-                            প্রতিবার খাবার সংগ্রহের সময় রেজিস্ট্রেশন কার্ড প্রদর্শন করতে হবে। </p></li>
-                        <li><p class="text-white">৪.কার্ডে উল্লেখিত বুথ থেকে উপহার সামগ্রী সংগ্রহের ক্ষেত্রেও রেজিস্ট্রেশন কার্ড প্রদর্শন করতে হবে। </p></li>
-                        
-                    </ul>
-                </div>
 
-                    
-                        <div style="padding-top:50px;" class="management-sign">
-                        <div class="col-md-4 signature"><img src="/frontend/img/asit-signature.png" alt="asit-signature"/></div>
-                        <div class="col-md-4 signature"><img src="/frontend/img/jillur-rahman.png" alt="jillur-rahman"/></div>
-                       <div class="col-md-4 signature"><img src="/frontend/img/ratan-signature.png" alt="ratan-signature"/></div>
+                        <ul class="rule">
+                            <li><p class="text-white">
+                                    ১.কলেজ শিক্ষার্থী বা তাদের সাথে আগত অতিথিদের অনুষ্ঠানের তিনদিন রেজিস্ট্রেশন কার্ড
+                                    সাথে রাখা বাধ্যতামূলক।
+                                    রেজিস্ট্রেশন কার্ড ব্যাতিত কোনোভাবেই ভেন্যুতে প্রবেশ করা যাবেনা এবং খাবার সংগ্রহ করা
+                                    যাবেনা।
+                                </p></li>
+                            <li><p class="text-white">২.নিরাপত্তা নিশ্চিত করার সুবিধার্থে আমন্ত্রিত সকল শিক্ষার্থী এবং
+                                    অতিথিদের রেজিস্ট্রেশন কার্ড সর্বদা দৃশ্যমান রাখতে অনুরোধ করা যাচ্ছে।
+                                    ভলান্টিয়ারগণ যে কোনো মুহূর্তে রেজিস্ট্রেশন কার্ড চেক করতে পারেন।</p></li>
+                            <li><p class="text-white">৩. রেজিস্ট্রেশনই অনুষ্ঠানের ফুড কুপন হিসেবে বিবেচিত হবে।
+                                    প্রতিবার খাবার সংগ্রহের সময় রেজিস্ট্রেশন কার্ড প্রদর্শন করতে হবে। </p></li>
+                            <li><p class="text-white">৪.কার্ডে উল্লেখিত বুথ থেকে উপহার সামগ্রী সংগ্রহের ক্ষেত্রেও
+                                    রেজিস্ট্রেশন কার্ড প্রদর্শন করতে হবে। </p></li>
+
+                        </ul>
+                    </div>
+
+
+                    <div style="padding-top:50px;" class="management-sign">
+                        <div class="col-md-4 signature"><img src="/frontend/img/asit-signature.png"
+                                                             alt="asit-signature"/></div>
+                        <div class="col-md-4 signature"><img src="/frontend/img/jillur-rahman.png" alt="jillur-rahman"/>
                         </div>
-           
-                       <div class=""><p>
-                        <img style="margin-top:50px;" src="/frontend/img/qr.png" alt="qr"/>
-                    </p>
-                        </div>
+                        <div class="col-md-4 signature"><img src="/frontend/img/ratan-signature.png"
+                                                             alt="ratan-signature"/></div>
+                    </div>
+
+                    <div class=""><p>
+                            <img style="margin-top:50px;" src="/frontend/img/qr.png" alt="qr"/>
+                        </p>
+                    </div>
                 </div>
 
             </div>
@@ -178,14 +192,14 @@
 
                 <div style="text-align: right;
     padding: 0 0 15px 0px;" class="col-md-8 mx-auto">
-                    <a  href="/download" class="btn btn-warning">ডাউনলোড করুন <i class="fa-regular fa-arrow-down-to-bracket"></i></a>
+                    <a href="/download" class="btn btn-warning">ডাউনলোড করুন <i
+                            class="fa-regular fa-arrow-down-to-bracket"></i></a>
                 </div>
             </div>
 
         </div>
-        
+
 
     </section>
-
 
 @endsection

@@ -313,6 +313,9 @@ class Controller extends BaseController
 
 
         // echo "Transaction is Successful";
+        Student::where('id',Session::get("student_id")  )->update([
+            'is_payment'=> true,
+        ]);
 
         $tran_id = $request->input('tran_id');
         $amount = $request->input('amount');
@@ -385,14 +388,18 @@ class Controller extends BaseController
                 't_shirt_size' => $student->t_shirt_size,
                 'education_year' => $student->education_year,
                 'profile_pic' => $student->profile_pic,
+                'logo' => "/frontend/img/header-logo.png",
+                'sign1' => "/frontend/img/asit-signature.png",
+                'sign2' => "/frontend/img/jillur-rahman.png",
+                'sign3' => "/frontend/img/ratan-signature.png",
                 'subject' => "অংশ হোন ৭৫ বছরের ঐতিহ্যের রেজিস্ট্রেশন ",
             ];
-            $message = "Thank you. $student->name. Your registration Successful";
+            $message = "Congrats! Your '75 Years Celebration and Reunion of Chandpur College' registration is Successful! Check Your Email Inbox or Spam Folder for Invitation Letter.";
 
             sendSms($student->phone, $message);
 
-            /*       $pdf = Pdf::loadView('ticket', $data);
-                   //return $pdf->stream();
+                 /*  $pdf = Pdf::loadView('ticket', $data);
+                   return $pdf->stream();
 
 
                    $pdf->setOption(['dpi' => 150, 'defaultFont' => 'Siyamrupali']);
@@ -697,8 +704,13 @@ class Controller extends BaseController
     public function test()
     {
 
-        // return;
-
+        $payments= Payment::all();
+        foreach ($payments as $item){
+            Student::where('id', $item->student_id)->update([
+                'is_payment'=> true
+            ]);
+        }
+   return "ok";
 
         return view("test");
     }

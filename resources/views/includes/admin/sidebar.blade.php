@@ -22,11 +22,11 @@
         </div>
         <div class="js-sidebar-scroll">
             <div class="content-side content-side-full">
-                <button type="button"
+              {{--  <button type="button"
                         class="btn btn-primary w-100 push d-flex align-items-center justify-content-between">
                     <span>Add Project</span>
                     <i class="fa fa-plus opacity-50 ms-1"></i>
-                </button>
+                </button>--}}
                 <ul class="nav-main">
                     <li class="nav-main-item">
                         <a class="nav-main-link active" href="/dashboard">
@@ -35,7 +35,7 @@
                         </a>
                     </li>
                     <li class="nav-main-heading">Main</li>
-                    <li class="nav-main-item">
+                   {{-- <li class="nav-main-item">
                         <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true"
                            aria-expanded="false" href="#">
                             <i class="nav-main-link-icon fa fa-briefcase"></i>
@@ -58,9 +58,9 @@
                                 </a>
                             </li>
                         </ul>
-                    </li>
+                    </li>--}}
                     <li class="nav-main-item">
-                        <a class="nav-main-link" href="/students">
+                        <a class="nav-main-link" href="/all-students">
                             <i class="nav-main-link-icon fa fa-file-invoice-dollar"></i>
                             <span class="nav-main-link-name">Students</span>
                         </a>

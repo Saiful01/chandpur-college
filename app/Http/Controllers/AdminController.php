@@ -55,10 +55,20 @@ class AdminController extends Controller
 
     }
 
-    public function student()
+    public function AllStudent(Request $request)
     {
-         Student::with("academicQualification", "profession", "guest", "gift",'payment')->get();
-        return Redirect::to("/login");
+        $query=  Student::with("academicQualification", "profession", "guests", "gift", 'payment')->orderBy('created_at', "DESC");
+        if ($request['reg_no'] != null){
+            $query->where('registration_id', $request['reg_no']);
+        }
+        if ($request['date'] != null){
+            $query->whereDate('created_at', $request['date']);
+        }
+        if ($request['payment'] != null){
+            $query->where('is_payment', $request['payment']);
+        }
+        $result= $query->paginate(50);
+        return view('admin.student.all')->with('result', $result);
     }
 
     public function logOut()
@@ -69,6 +79,6 @@ class AdminController extends Controller
 
     public function paymentData()
     {
-       return Payment::orderBy("created_at","DESC")->get();
+        return Payment::orderBy("created_at", "DESC")->get();
     }
 }
