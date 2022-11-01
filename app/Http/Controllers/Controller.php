@@ -70,9 +70,9 @@ class Controller extends BaseController
             if ($request->hasFile('image')) {
                 $image = $request->file('image');
                 $image_name = time() . '.' . $image->getClientOriginalExtension();
-                $destinationPath = public_path('/uploads/student');
+                $destinationPath = public_path('/images/student');
                 $image->move($destinationPath, $image_name);
-                $image_file = '/uploads/student/' . $image_name;
+                $image_file = '/images/student/' . $image_name;
             }
             $request['profile_pic'] = $image_file;
             $request['registration_id'] = uniqid();
@@ -100,9 +100,9 @@ class Controller extends BaseController
             if ($request->hasFile('image')) {
                 $image = $request->file('image');
                 $image_name = time() . '.' . $image->getClientOriginalExtension();
-                $destinationPath = public_path('/uploads/student');
+                $destinationPath = public_path('/images/student');
                 $image->move($destinationPath, $image_name);
-                $image_file = '/uploads/student/' . $image_name;
+                $image_file = '/images/student/' . $image_name;
             }
             $request['profile_pic'] = $image_file;
             $request['registration_id'] = uniqid();
@@ -129,8 +129,17 @@ class Controller extends BaseController
             return Redirect::to("/student/personal-info");
         }
         if ($request->isMethod("POST")) {
+            //return $request->all();
             try {
-                //return $request->all();
+                $image_file = null;
+                if ($request->hasFile('image')) {
+                    $image = $request->file('image');
+                    $image_name = time() . '.' . $image->getClientOriginalExtension();
+                    $destinationPath = public_path('/images/marksheet');
+                    $image->move($destinationPath, $image_name);
+                    $image_file = '/images/marksheet/' . $image_name;
+                }
+
                 $array = [
                     'student_id' => $request['student_id'],
                     'program_name' => $request['program_name'],
@@ -139,6 +148,7 @@ class Controller extends BaseController
                     'roll_no' => $request['roll_no'],
                     'session' => $request['session'],
                     'reg_no' => $request['reg_no'],
+                    'mark_sheet' => $image_file,
 
                 ];
                 AcademicQualification::create($array);

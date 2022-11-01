@@ -59,7 +59,7 @@
                             </div>
                             <p> পারিবারিক সদস্যের তথ্যাবলী
 
-</p>
+                            </p>
                         </a>
                     </li>
                     <li class="list-inline-item">
@@ -121,7 +121,7 @@
                     <div class="card">
 
                         <div class="card-body">
-                            <form class="" method="post" action="/student/academic-info">
+                            <form class="" method="post" action="/student/academic-info" enctype="multipart/form-data">
 
                                 @csrf
                                 <input name="student_id" , value="{{$student_id}}" type="hidden"/>
@@ -132,7 +132,8 @@
                                         <label class="checkbox-inline">
                                             <input type="radio" required name="program_name" value="এইচএসসি">এইচএসসি
                                             <input type="radio" required name="program_name" value="অনার্স">অনার্স
-                                            <input type="radio" required name="program_name" value="ডিগ্রি পাস">ডিগ্রি পাস
+                                            <input type="radio" required name="program_name" value="ডিগ্রি পাস">ডিগ্রি
+                                            পাস
                                             <input type="radio" required name="program_name" value="মাস্টার্স">মাস্টার্স
                                         </label>
                                     </div>
@@ -168,70 +169,73 @@
                                 </div>
 
 
-
                                 <div class="input-group row pt-2">
 
                                     <div class="col-sm-12">
-                                    <p style="color:red;">এইচএসসির ক্ষেত্রে শুধুমাত্র ২০১৫ সাল পর্যন্ত পাসকৃত শিক্ষার্থীরা রেজিস্ট্রেশন করতে পারবে* </p>
-                                        <select required class="form-select" name="passing_year" >
-                                        <option value="">পাশের সাল: </option>
-                                        <option value="২০১৫">২০২০ </option>
-                                        <option value="২০১৫">২০১৯ </option>
-                                        <option value="২০১৫">২০১৮ </option>
-                                        <option value="২০১৫">২০১৭ </option>
-                                        <option value="২০১৫">২০১৬ </option>
-                                        <option value="২০১৫">২০১৫ </option>
-                                            <option value="২০১৪">২০১৪ </option>
-                                            <option value="২০১৩">২০১৩ </option>
-                                            <option value="২০১২">২০১২ </option>
-                                            <option value="২০১১">২০১১ </option>
-                                            <option value="২০১০">২০১০ </option>
-                                            <option value="২০০৯">২০০৯ </option>
-                                            <option value="২০০৮">২০০৮ </option>
-                                            <option value="২০০৭">২০০৭ </option>
-                                            <option value="২০০৬">২০০৬ </option>
-                                            <option value="২০০৫">২০০৫ </option>
-                                            <option value="২০০৪">২০০৪ </option>
-                                            <option value="২০০৩">২০০৩ </option>
-                                            <option value="২০০২">২০০২ </option>
-                                            <option value="২০০১">২০০১ </option>
-                                            <option value="২০০০">২০০০ </option>
-                                            <option value="১৯৯৯">১৯৯৯ </option>
-                                            <option value="১৯৯৮">১৯৯৮ </option>
-                                            <option value="১৯৯৭">১৯৯৭ </option>
-                                            <option value="১৯৯৬">১৯৯৬ </option>
-                                            <option value="১৯৯৫">১৯৯৫ </option>
-                                            <option value="১৯৯৪">১৯৯৪ </option>
-                                            <option value="১৯৯৩">১৯৯৩ </option>
-                                            <option value="১৯৯২">১৯৯২ </option>
-                                            <option value="১৯৯১">১৯৯১ </option>
-                                            <option value="১৯৯০">১৯৯০ </option>
-                                            <option value="১৯৮৯">১৯৮৯ </option>
-                                            <option value="১৯৮৮">১৯৮৮ </option>
-                                            <option value="১৯৮৭">১৯৮৭ </option>
-                                            <option value="১৯৮৬">১৯৮ </option>
-                                            <option value="১৯৮৫">১৯৮৫ </option>
-                                            <option value="১৯৮৪">১৯৮৪ </option>
-                                            <option value="১৯৮৩">১৯৮৩ </option>
-                                            <option value="১৯৮২">১৯৮২ </option>
-                                            <option value="১৯৮১">১৯৮১ </option>
-                                            <option value="১৯৮০">১৯৮০ </option>
-                                            <option value="১৯৭৯">১৯৭৯ </option>
-                                            <option value="১৯৭৮">১৯৭৮ </option>
-                                            <option value="১৯৭৭">১৯৭৭ </option>
-                                            <option value="১৯৭৬">১৯৭৬ </option>
-                                            <option value="১৯৭৫">১৯৭৫ </option>
-                                            <option value="১৯৭৪">১৯৭৪ </option>
-                                            <option value="১৯৭৩">১৯৭৩ </option>
-                                            <option value="১৯৭২">১৯৭২ </option>
-                                            <option value="১৯৭১">১৯৭১ </option>
-                                            <option value="১৯৭০">১৯৭০ </option>
-                                            <option value="১৯৬৯">১৯৬৯ </option>
-                                            <option value="১৯৬৮">১৯৬৮ </option>
-                                            <option value="১৯৬৭">১৯৬৭ </option>
-                                            <option value="১৯৬৬">১৯৬৬ </option>
-                                            <option value="১৯৬৫">১৯৬৫ </option>
-                                            <option value="১৯৬৪">১৯৬৪ </option>
+                                        <p style="color:red;">শুধুমাত্র ২০১৫ সাল পর্যন্ত এইচএসসি, ২০২০ সাল পর্যন্ত
+                                            ডিগ্রি/অনার্স এবং ২০২২ সাল পর্যন্ত মাস্টার্স পরীক্ষায় কৃতকার্য প্রাক্তন
+                                            শিক্ষার্থীরা রেজিস্ট্রেশন করতে পারবেন।* </p>
+                                        <select required class="form-select" name="passing_year">
+                                            <option value="">পাশের সাল:</option>
+                                            <option value="২০২২">২০২২</option>
+                                            <option value="২০২১">২০২১</option>
+                                            <option value="২০২০">২০২০</option>
+                                            <option value="২০১৯">২০১৯</option>
+                                            <option value="২০১৮">২০১৮</option>
+                                            <option value="২০১৭">২০১৭</option>
+                                            <option value="২০১৬">২০১৬</option>
+                                            <option value="২০১৫">২০১৫</option>
+                                            <option value="২০১৪">২০১৪</option>
+                                            <option value="২০১৩">২০১৩</option>
+                                            <option value="২০১২">২০১২</option>
+                                            <option value="২০১১">২০১১</option>
+                                            <option value="২০১০">২০১০</option>
+                                            <option value="২০০৯">২০০৯</option>
+                                            <option value="২০০৮">২০০৮</option>
+                                            <option value="২০০৭">২০০৭</option>
+                                            <option value="২০০৬">২০০৬</option>
+                                            <option value="২০০৫">২০০৫</option>
+                                            <option value="২০০৪">২০০৪</option>
+                                            <option value="২০০৩">২০০৩</option>
+                                            <option value="২০০২">২০০২</option>
+                                            <option value="২০০১">২০০১</option>
+                                            <option value="২০০০">২০০০</option>
+                                            <option value="১৯৯৯">১৯৯৯</option>
+                                            <option value="১৯৯৮">১৯৯৮</option>
+                                            <option value="১৯৯৭">১৯৯৭</option>
+                                            <option value="১৯৯৬">১৯৯৬</option>
+                                            <option value="১৯৯৫">১৯৯৫</option>
+                                            <option value="১৯৯৪">১৯৯৪</option>
+                                            <option value="১৯৯৩">১৯৯৩</option>
+                                            <option value="১৯৯২">১৯৯২</option>
+                                            <option value="১৯৯১">১৯৯১</option>
+                                            <option value="১৯৯০">১৯৯০</option>
+                                            <option value="১৯৮৯">১৯৮৯</option>
+                                            <option value="১৯৮৮">১৯৮৮</option>
+                                            <option value="১৯৮৭">১৯৮৭</option>
+                                            <option value="১৯৮৬">১৯৮</option>
+                                            <option value="১৯৮৫">১৯৮৫</option>
+                                            <option value="১৯৮৪">১৯৮৪</option>
+                                            <option value="১৯৮৩">১৯৮৩</option>
+                                            <option value="১৯৮২">১৯৮২</option>
+                                            <option value="১৯৮১">১৯৮১</option>
+                                            <option value="১৯৮০">১৯৮০</option>
+                                            <option value="১৯৭৯">১৯৭৯</option>
+                                            <option value="১৯৭৮">১৯৭৮</option>
+                                            <option value="১৯৭৭">১৯৭৭</option>
+                                            <option value="১৯৭৬">১৯৭৬</option>
+                                            <option value="১৯৭৫">১৯৭৫</option>
+                                            <option value="১৯৭৪">১৯৭৪</option>
+                                            <option value="১৯৭৩">১৯৭৩</option>
+                                            <option value="১৯৭২">১৯৭২</option>
+                                            <option value="১৯৭১">১৯৭১</option>
+                                            <option value="১৯৭০">১৯৭০</option>
+                                            <option value="১৯৬৯">১৯৬৯</option>
+                                            <option value="১৯৬৮">১৯৬৮</option>
+                                            <option value="১৯৬৭">১৯৬৭</option>
+                                            <option value="১৯৬৬">১৯৬৬</option>
+                                            <option value="১৯৬৫">১৯৬৫</option>
+                                            <option value="১৯৬৪">১৯৬৪</option>
                                         </select>
 
                                     </div>
@@ -249,6 +253,12 @@
                                     <div class="col-sm-1-12">
                                         <input type="text" class="form-control" name="reg_no"
                                                placeholder=" রেজিস্ট্রেশন নং:">
+                                    </div>
+                                </div>
+                                <div class="input-group row pt-2">
+                                    <div class="col-sm-1-12">
+                                        <label>আপনার মার্ক শিট/সার্টিফিকেটের কপি (ইমেজ, পিডিএফ) আপলোড করুন</label>
+                                        <input type="file" class="form-control" name="image" id="image" required>
                                     </div>
                                 </div>
 

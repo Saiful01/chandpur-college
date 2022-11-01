@@ -121,8 +121,9 @@
                     <div class="card">
 
                         <div class="card-body">
-                            <form class="" method="post" action="/student/personal-info">
-                                @csrf
+                            <form class="" method="post" action="/student/personal-info" enctype="multipart/form-data">
+
+                            @csrf
                                 <div class="input-group row">
                                     <label for="name" class="col-sm-12 col-form-label"></label>
                                     <div class="col-sm-12">
