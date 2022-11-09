@@ -38,6 +38,8 @@ Route::group(['middleware' => 'admin'], function () {
 
 
     Route::get('/all-students', [AdminController::class, 'AllStudent']);
+    Route::get('/payment-students', [AdminController::class, 'paymentStudent']);
+    Route::get('/non-payment-students', [AdminController::class, 'nonpaymentStudent']);
 
 
     Route::get('/payment', [AdminController::class, 'paymentData']);
@@ -58,10 +60,14 @@ Route::get('/registration', [Controller::class, 'registration']);
 
 Route::group(['prefix' => 'student'], function () {
     Route::any('/personal-info', [Controller::class, 'personalInfo']);
+    Route::any('/personal-info-update', [Controller::class, 'personalInfoUpdate']);
     Route::any('/academic-info', [Controller::class, 'academicInfo']);
+    Route::any('/academic-info-update', [Controller::class, 'academicInfoUpdate']);
     Route::any('/professional-info', [Controller::class, 'professionalInfo']);
+    Route::any('/professional-info-update', [Controller::class, 'professionalInfoUpdate']);
     Route::any('/guest-info', [Controller::class, 'guestInfo']);
     Route::any('/gift-info', [Controller::class, 'giftInfo']);
+    Route::any('/gift-info-update', [Controller::class, 'giftInfoUpdate']);
     Route::any('/fee-info', [Controller::class, 'feeInfo']);
 
     Route::any('/payment/{amount}', [Controller::class, 'payment']);

@@ -192,7 +192,7 @@
 
                 <div style="text-align: right;
     padding: 0 0 15px 0px;" class="col-md-8 mx-auto">
-                    <a href="/download" class="btn btn-warning">ডাউনলোড করুন <i
+                    <a href="/pdf/{{$student->registration_id}}.pdf" class="btn btn-warning" download="">ডাউনলোড করুন <i
                             class="fa-regular fa-arrow-down-to-bracket"></i></a>
                 </div>
             </div>

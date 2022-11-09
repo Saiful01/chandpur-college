@@ -29,6 +29,7 @@ class Controller extends BaseController
 
     public function home()
     {
+        Session::forget('student_id');
         return view("frontend.home.index");
 
     }
@@ -84,6 +85,34 @@ class Controller extends BaseController
                 Session::put("student_id", $student_id);
 
                 Alert::success("Success", "Successfully Created");
+                return Redirect::to("/student/academic-info");
+            } catch (\Exception $exception) {
+                Alert::error("Success", $exception->getMessage());
+                return back();
+            }
+        }
+        return view("frontend.student.personal-info");
+    }
+
+    public function personalInfoUpdate(Request $request)
+    {
+        if ($request->isMethod("POST")) {
+            $image_file = $request['profile_pic'];
+            if ($request->hasFile('image')) {
+                $image = $request->file('image');
+                $image_name = time() . '.' . $image->getClientOriginalExtension();
+                $destinationPath = public_path('/images/student');
+                $image->move($destinationPath, $image_name);
+                $image_file = '/images/student/' . $image_name;
+            }
+            $request['profile_pic'] = $image_file;
+            $request['created_at'] = Carbon::now();
+            $request['updated_at'] = Carbon::now();
+
+            try {
+                Student::where('id', $request['id'])->update($request->except("_token", "image"));
+
+                Alert::success("Success", "Successfully Updated");
                 return Redirect::to("/student/academic-info");
             } catch (\Exception $exception) {
                 Alert::error("Success", $exception->getMessage());
@@ -161,8 +190,56 @@ class Controller extends BaseController
                 return back();
             }
         }
+        $academic = AcademicQualification::where('student_id', (Session::get("student_id")))->first();
 
-        return view("frontend.student.academic-info")->with("student_id", (Session::get("student_id")));
+        return view("frontend.student.academic-info")
+            ->with("student_id", (Session::get("student_id")))
+            ->with("academic", $academic);
+    }
+
+    public function academicInfoUpdate(Request $request)
+    {
+        if (Session::get("student_id") == null) {
+            return Redirect::to("/student/personal-info");
+        }
+        if ($request->isMethod("POST")) {
+            //return $request->all();
+            try {
+                $image_file = $request['mark_sheet'];
+                if ($request->hasFile('image')) {
+                    $image = $request->file('image');
+                    $image_name = time() . '.' . $image->getClientOriginalExtension();
+                    $destinationPath = public_path('/images/marksheet');
+                    $image->move($destinationPath, $image_name);
+                    $image_file = '/images/marksheet/' . $image_name;
+                }
+
+                $array = [
+                    'student_id' => $request['student_id'],
+                    'program_name' => $request['program_name'],
+                    'department' => $request['department'],
+                    'passing_year' => $request['passing_year'],
+                    'roll_no' => $request['roll_no'],
+                    'session' => $request['session'],
+                    'reg_no' => $request['reg_no'],
+                    'mark_sheet' => $image_file,
+
+                ];
+                AcademicQualification::where('id', $request['id'])->update($array);
+                Alert::success("Success", "Successfully Updated");
+                return Redirect::to("/student/professional-info");
+
+            } catch (\Exception $exception) {
+                //return $exception->getMessage();
+                Alert::error("Success", $exception->getMessage());
+                return back();
+            }
+        }
+        $academic = AcademicQualification::where('student_id', (Session::get("student_id")))->first();
+
+        return view("frontend.student.academic-info")
+            ->with("student_id", (Session::get("student_id")))
+            ->with("academic", $academic);
     }
 
     public function professionalInfo(Request $request)
@@ -181,8 +258,34 @@ class Controller extends BaseController
                 return back();
             }
         }
+        $professional = ProfessionalExperinece::where('student_id', (Session::get("student_id")))->first();
 
-        return view("frontend.student.professional-info")->with("student_id", (Session::get("student_id")));
+        return view("frontend.student.professional-info")
+            ->with("professional", $professional)
+            ->with("student_id", (Session::get("student_id")));
+    }
+
+    public function professionalInfoUpdate(Request $request)
+    {
+        if (Session::get("student_id") == null) {
+            return Redirect::to("/student/personal-info");
+        }
+
+        if ($request->isMethod("POST")) {
+            try {
+                ProfessionalExperinece::where('id', $request['id'])->update($request->except("_token", "image"));
+                Alert::success("Success", "Successfully Updated");
+                return Redirect::to("/student/guest-info");
+            } catch (\Exception $exception) {
+                Alert::error("Success", $exception->getMessage());
+                return back();
+            }
+        }
+        $professional = ProfessionalExperinece::where('student_id', (Session::get("student_id")))->first();
+
+        return view("frontend.student.professional-info")
+            ->with("professional", $professional)
+            ->with("student_id", (Session::get("student_id")));
     }
 
     public function guestInfo(Request $request)
@@ -194,13 +297,14 @@ class Controller extends BaseController
         if ($request->isMethod("POST")) {
 
 
-            //return $request->all();
+          //  return $request->all();
 
             try {
                 if (implode(null, $request['guest_name']) == null) {
+
                     return Redirect::to("/student/gift-info");
                 }
-                // return $request->all();
+               // return $request->all();
 
 
                 $i = 0;
@@ -217,6 +321,10 @@ class Controller extends BaseController
                     GuestInfo::create($array);
                     $i++;
                 }
+                Student::where('id', (Session::get("student_id")))->update([
+                    'is_guest'=>true
+                ]);
+
 
                 Alert::success("Success", "Successfully Created");
                 return Redirect::to("/student/gift-info");
@@ -225,8 +333,11 @@ class Controller extends BaseController
                 return back();
             }
         }
+        $student = Student::where('id', (Session::get("student_id")))->first();
 
-        return view("frontend.student.guest-info")->with("student_id", (Session::get("student_id")));
+        return view("frontend.student.guest-info")
+            ->with("student", $student)
+            ->with("student_id", (Session::get("student_id")));
     }
 
     public function giftInfo(Request $request)
@@ -246,7 +357,32 @@ class Controller extends BaseController
                 return back();
             }
         }
+        $gift = GiftDelivery::where('student_id', (Session::get("student_id")))->first();
         return view("frontend.student.gift-info")
+            ->with("gift", $gift)
+            ->with("student_id", (Session::get("student_id")));
+    }
+
+    public function giftInfoUpdate(Request $request)
+    {
+        if (Session::get("student_id") == null) {
+            return Redirect::to("/student/personal-info");
+        }
+
+        if ($request->isMethod("POST")) {
+            // return $request->all();
+            try {
+                GiftDelivery::where('id', $request['id'])->update($request->except("_token", "image"));
+                Alert::success("Success", "Successfully Created");
+                return Redirect::to("/student/fee-info");
+            } catch (\Exception $exception) {
+                Alert::error("Success", $exception->getMessage());
+                return back();
+            }
+        }
+        $gift = GiftDelivery::where('student_id', (Session::get("student_id")))->first();
+        return view("frontend.student.gift-info")
+            ->with("gift", $gift)
             ->with("student_id", (Session::get("student_id")));
     }
 
@@ -323,8 +459,8 @@ class Controller extends BaseController
 
 
         // echo "Transaction is Successful";
-        Student::where('id',Session::get("student_id")  )->update([
-            'is_payment'=> true,
+        Student::where('id', Session::get("student_id"))->update([
+            'is_payment' => true,
         ]);
 
         $tran_id = $request->input('tran_id');
@@ -381,10 +517,10 @@ class Controller extends BaseController
                 ->with("student", $student);
         } else {
 
-            $invoice = uniqid();
+            $invoice = $student->registration_id;
             $data = [
-                'invoice' => $invoice,
-                'name' => $student->name,
+                'invoice' => $student->registration_id,
+                'name' => $student->eng_name,
                 'nationality' => $student->nationality,
                 'gender' => $student->gender,
                 'email' => $student->email,
@@ -408,17 +544,17 @@ class Controller extends BaseController
 
             sendSms($student->phone, $message);
 
-                 /*  $pdf = Pdf::loadView('ticket', $data);
-                   return $pdf->stream();
+            /*  $pdf = Pdf::loadView('ticket', $data);
+              return $pdf->stream();
 
 
-                   $pdf->setOption(['dpi' => 150, 'defaultFont' => 'Siyamrupali']);
+              $pdf->setOption(['dpi' => 150, 'defaultFont' => 'Siyamrupali']);
 
 
-                   $path = public_path('pdf/');
-                   $fileName = $invoice . '.' . 'pdf';
-                   $pdf->loadView($path . '/' . $fileName);
-                   $pdf->save($path . '/' . $fileName);*/
+              $path = public_path('pdf/');
+              $fileName = $invoice . '.' . 'pdf';
+              $pdf->loadView($path . '/' . $fileName);
+              $pdf->save($path . '/' . $fileName);*/
 
 
             $path = public_path('/pdf/');
@@ -426,7 +562,9 @@ class Controller extends BaseController
             if (!File::exists($path)) {
                 File::makeDirectory($path);
             }
+
             Pdf::loadView('ticket', $data)->save($path . '/' . $fileName);
+
 
             Mail::send('email-template.confirm', $data, function ($message) use ($data, $invoice) {
                 $message->to($data['email'])
@@ -434,6 +572,8 @@ class Controller extends BaseController
                 $message->from('asad.livingbrands@gmail.com', $data['subject']);
                 $message->attach(public_path() . "/pdf/$invoice.pdf");
             });
+            //  return "ok";
+            Session::forget('student_id');
 
             return view("frontend.student.invitation-info")
                 ->with("student", $student);
@@ -714,13 +854,13 @@ class Controller extends BaseController
     public function test()
     {
 
-        $payments= Payment::all();
-        foreach ($payments as $item){
+        $payments = Payment::all();
+        foreach ($payments as $item) {
             Student::where('id', $item->student_id)->update([
-                'is_payment'=> true
+                'is_payment' => true
             ]);
         }
-   return "ok";
+        return "ok";
 
         return view("test");
     }

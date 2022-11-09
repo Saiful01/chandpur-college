@@ -44,13 +44,12 @@
                                     <input type="text" id="name" class="form-control" placeholder="Registration No"
                                            name="reg_no" >
                                 </div>
-{{--
                                 <div class="col-md-3">
 
-                                    <input type="text" id="name" class="form-control" placeholder="Education Year"
-                                           name="education_year" >
+                                    <input type="text" id="name" class="form-control" placeholder="Mobile Number"
+                                           name="phone" >
 
-                                </div>--}}
+                                </div>
                                 <div class="col-md-2">
 
                                     <input type="date" id="name" class="form-control" placeholder="Date"
@@ -100,6 +99,7 @@
                         <th>Gift</th>
                         <th>Payment</th>
                         <th class="d-none d-sm-table-cell">Payment Status</th>
+                        <th class="d-none d-sm-table-cell">Invitation Letter</th>
 
                     </tr>
                     </thead>
@@ -488,6 +488,13 @@
 
                             </td>
 
+                            <td>
+
+                            <!-- <img src="{{$item->profile_pic}}"  class="img-thumbnail" width="75" /> -->
+
+                            <a href="/pdf/{{$item->registration_id}}.pdf" download>Download</a>
+                                </td>
+
                         </tr>
                     @endforeach
 
@@ -531,4 +538,4 @@
         @endonce
     @endpush
 
-@endsection
+<!-- @endsection -->

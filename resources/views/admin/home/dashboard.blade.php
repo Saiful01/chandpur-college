@@ -3,7 +3,7 @@
 @section("content")
 
     <div class="row">
-        <div class="col-md-6 col-xl-4">
+        <!-- <div class="col-md-6 col-xl-4">
             <a class="block block-bordered block-rounded block-link-shadow text-start"
                href="javascript:void(0)">
                 <div class="block-content block-content-full d-flex justify-content-between align-items-center">
@@ -16,10 +16,10 @@
                     </div>
                 </div>
             </a>
-        </div>
-        <div class="col-md-6 col-xl-4">
+        </div> -->
+        <div class="col-md-6 col-xl-6">
             <a class="block block-bordered block-rounded block-link-shadow text-start"
-               href="javascript:void(0)">
+               href="/payment-students">
                 <div class="block-content block-content-full d-flex justify-content-between align-items-center">
                     <div>
                         <div class="fs-3 fw-semibold">{{\App\Models\Student::where('is_payment', true)->count()}}</div>
@@ -31,9 +31,9 @@
                 </div>
             </a>
         </div>
-        <div class="col-md-6 col-xl-4">
+        <div class="col-md-6 col-xl-6">
             <a class="block block-bordered block-rounded block-link-shadow text-start"
-               href="javascript:void(0)">
+               href="/non-payment-students">
                 <div class="block-content block-content-full d-flex justify-content-between align-items-center">
                     <div>
                         <div class="fs-3 fw-semibold">{{\App\Models\Student::where('is_payment', false)->count()}}</div>
@@ -48,4 +48,4 @@
 
     </div>
 
-@endsection
+<!-- @endsection -->

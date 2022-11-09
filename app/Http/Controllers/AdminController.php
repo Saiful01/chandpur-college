@@ -57,18 +57,59 @@ class AdminController extends Controller
 
     public function AllStudent(Request $request)
     {
-        $query=  Student::with("academicQualification", "profession", "guests", "gift", 'payment')->orderBy('created_at', "DESC");
-        if ($request['reg_no'] != null){
+        $query = Student::with("academicQualification", "profession", "guests", "gift", 'payment')->orderBy('created_at', "DESC");
+        if ($request['reg_no'] != null) {
             $query->where('registration_id', $request['reg_no']);
         }
-        if ($request['date'] != null){
+        if ($request['phone'] != null) {
+            $query->where('phone', $request['phone']);
+        }
+        if ($request['date'] != null) {
             $query->whereDate('created_at', $request['date']);
         }
-        if ($request['payment'] != null){
+        if ($request['payment'] != null) {
             $query->where('is_payment', $request['payment']);
         }
-        $result= $query->paginate(50);
+        $result = $query->paginate(50);
         return view('admin.student.all')->with('result', $result);
+    }
+
+    public function paymentStudent(Request $request)
+    {
+        $query = Student::with("academicQualification", "profession", "guests", "gift", 'payment')->orderBy('created_at', "DESC")->where('is_payment', true);
+        if ($request['reg_no'] != null) {
+            $query->where('registration_id', $request['reg_no']);
+        }
+        if ($request['phone'] != null) {
+            $query->where('phone', $request['phone']);
+        }
+        if ($request['date'] != null) {
+            $query->whereDate('created_at', $request['date']);
+        }
+        if ($request['payment'] != null) {
+            $query->where('is_payment', $request['payment']);
+        }
+        $result = $query->paginate(50);
+        return view('admin.student.payment')->with('result', $result);
+    }
+
+    public function nonpaymentStudent(Request $request)
+    {
+        $query = Student::with("academicQualification", "profession", "guests", "gift", 'payment')->orderBy('created_at', "DESC")->where('is_payment', false);
+        if ($request['reg_no'] != null) {
+            $query->where('registration_id', $request['reg_no']);
+        }
+        if ($request['phone'] != null) {
+            $query->where('phone', $request['phone']);
+        }
+        if ($request['date'] != null) {
+            $query->whereDate('created_at', $request['date']);
+        }
+        if ($request['payment'] != null) {
+            $query->where('is_payment', $request['payment']);
+        }
+        $result = $query->paginate(50);
+        return view('admin.student.non_payment')->with('result', $result);
     }
 
     public function logOut()

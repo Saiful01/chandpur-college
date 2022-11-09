@@ -59,12 +59,26 @@
                             </li>
                         </ul>
                     </li>--}}
+
+                    <li class="nav-main-item">
+                        <a class="nav-main-link" href="/payment-students">
+                            <i class="nav-main-link-icon fa fa-file-invoice-dollar"></i>
+                            <span class="nav-main-link-name">Payment</span>
+                        </a>
+                    </li>
+                    <li class="nav-main-item">
+                        <a class="nav-main-link" href="/non-payment-students">
+                            <i class="nav-main-link-icon fa fa-file-invoice-dollar"></i>
+                            <span class="nav-main-link-name">No Payment</span>
+                        </a>
+                    </li>
                     <li class="nav-main-item">
                         <a class="nav-main-link" href="/all-students">
                             <i class="nav-main-link-icon fa fa-file-invoice-dollar"></i>
                             <span class="nav-main-link-name">Students</span>
                         </a>
                     </li>
+
 
                     <li class="nav-main-heading">Settings</li>
                     <li class="nav-main-item">
@@ -74,7 +88,7 @@
                         </a>
                     </li>
                     <li class="nav-main-item">
-                        <a class="nav-main-link" href="">
+                        <a class="nav-main-link" href="/log-out">
                             <i class="nav-main-link-icon fa fa-sign-out-alt"></i>
                             <span class="nav-main-link-name">Logout</span>
                         </a>

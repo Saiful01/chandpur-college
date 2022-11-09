@@ -31,6 +31,7 @@ return new class extends Migration {
             $table->string("registration_id")->nullable();
             $table->string("password")->nullable();
             $table->string("t_shirt_size")->nullable();
+            $table->boolean("is_guest")->default(false);
             $table->integer("Student_type")->default(1); //previous Student= 1; current student=2
             $table->timestamps();
         });

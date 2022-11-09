@@ -47,7 +47,7 @@
     </style>
 </head>
 <body ng-app="myApp" ng-controller="myController">
-@include('sweetalert::alert')
+<!-- @include('sweetalert::alert') -->
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
@@ -109,7 +109,7 @@
                         <li><a href="#">যোগাযোগ</a></li>
                     </ul>
 
-                    
+
                 </div>
             </div>
 			 <div class="col-md-4">
@@ -118,10 +118,10 @@
                         <li><a href="/privacy-policy">Privacy Policy</a></li>
                         <li><a href="/terms-condition">Terms and Condition</a></li>
                         <li><a href="/refund-policy">Refund Policy</a></li>
-                        
+
                     </ul>
 
-                    
+
                 </div>
             </div>
         </div>
@@ -156,7 +156,7 @@
 <script src="/frontend/js/bootstrap.min.js"></script>
 <!-- Option 2: Separate Popper and Bootstrap JS -->
 
-<script src="frontend/js/aos.js"></script>
+{{--<script src="frontend/js/aos.js"></script>--}}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"
         integrity="sha512-IsNh5E3eYy3tr/JiX2Yx4vsCujtkhwl7SLqgnwLNgf04Hrt9BT9SXlLlZlWx+OK4ndzAoALhsMNcCmkggjZB1w=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>

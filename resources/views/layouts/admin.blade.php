@@ -32,7 +32,7 @@
     @include('sweetalert::alert')
 
     <header id="page-header">
-        <div class="content-header">
+      {{--  <div class="content-header">
             <div class="d-flex align-items-center space-x-2">
                 <button type="button" class="btn btn-sm btn-alt-secondary" data-toggle="layout"
                         data-action="sidebar_toggle">
@@ -93,7 +93,7 @@
                 </div>
 
             </div>
-        </div>
+        </div>--}}
         <div id="page-header-search" class="overlay-header bg-body-extra-light">
             <div class="content-header">
                 <form class="w-100" action="be_pages_generic_search.html" method="POST">

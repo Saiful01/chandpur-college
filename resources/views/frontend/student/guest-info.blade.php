@@ -123,6 +123,13 @@
 
                                 @csrf
                                 <input name="student_id" value="{{$student_id}}" type="hidden"/>
+                                <label class="checkbox-inline">
+                                    <label>কোন পারিবারিক সদস্য </label>
+                                    <input type="radio" @if($student->is_guest == false) checked @endif required  name="family_member" value="নাই">নাই
+                                    <input type="radio" @if($student->is_guest == true) checked @endif required   name="family_member" value="আছে">আছে
+
+
+                                </label>
                                 <div ng-repeat="guest_item in guest_items">
                                     <div class="input-group row">
                                         <label for="guest_name" class="col-sm-1-12 col-form-label"></label>
@@ -183,9 +190,10 @@
 
                                 <div class="input-group row">
                                     <div class="col-md-12">
-                                        
-                                        <button type="button" class="btn btn-default btn-more" ng-click="removeGuestItem()">
-                                          - 
+
+                                        <button type="button" class="btn btn-default btn-more"
+                                                ng-click="removeGuestItem()">
+                                            -
                                         </button>
                                         <button type="button" class="btn btn-default btn-more" ng-click="addNewGuest()">
                                             আরও অতিথি +
@@ -196,6 +204,8 @@
 
                                 <p class="bordered-text mt-3 info-text">অতিথি হিসেবে শুধুমাত্র স্বামী স্ত্রী ও সন্তান
                                     বিবেচিত হবে </p>
+
+
                                 <div class="input-group row pt-2">
                                     <div class="col-sm-12">
                                         <button type="submit" class="btn btn-warning">পরবর্তী >></button>
