@@ -79,6 +79,13 @@
                         </a>
                     </li>
 
+                    <li class="nav-main-item">
+                        <a class="nav-main-link" href="/souvenirs">
+                            <i class="nav-main-link-icon fa fa-file-invoice-dollar"></i>
+                            <span class="nav-main-link-name">Souvenir</span>
+                        </a>
+                    </li>
+
 
                     <li class="nav-main-heading">Settings</li>
                     <li class="nav-main-item">

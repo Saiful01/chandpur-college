@@ -47,7 +47,7 @@
                                 <div class="col-md-3">
 
                                     <input type="text" id="name" class="form-control" placeholder="Mobile Number"
-                                           name="phone" >
+                                           name="phone">
 
                                 </div>
                                 {{--
@@ -63,16 +63,16 @@
                                            name="date">
 
                                 </div>
-                             {{--   <div class="col-md-2">
+                                {{--   <div class="col-md-2">
 
-                                    <select class="form-select" name="payment" id="country_id">
-                                        <option value="">Payment</option>
-                                        <option value="1">Yes</option>
-                                        <option value="0">No</option>
+                                       <select class="form-select" name="payment" id="country_id">
+                                           <option value="">Payment</option>
+                                           <option value="1">Yes</option>
+                                           <option value="0">No</option>
 
-                                    </select>
+                                       </select>
 
-                                </div>--}}
+                                   </div>--}}
                                 <div class="col-md-1">
                                     <button type="submit" class="btn btn-success" id="edit-btn">Search</button>
                                 </div>
@@ -105,6 +105,7 @@
                         <th>Profession</th>
                         <th>Guest</th>
                         <th>Gift</th>
+                        <th>Time</th>
                         <th>Payment</th>
                         <th class="d-none d-sm-table-cell">Payment Status</th>
                         <th class="d-none d-sm-table-cell">Invitation Letter</th>
@@ -113,11 +114,20 @@
                     </thead>
                     <tbody>
 
-                    <?php $i = 1?>
+                    <?php $i = 1 ?>
                     @foreach($result as $item)
                         <tr>
                             <td class="text-center">{{$i++}}</td>
-                            <td class="font-w600">{{$item->registration_id}}</td>
+                            <td class="font-w600">{{$item->registration_id}}
+                                @if(count($item->payments)> 0)
+                                    @foreach($item->payments as $payment)
+
+                                        Tran ID: {{$payment->tran_id}}
+                                        Tk: {{$payment->amount}}
+                                    @endforeach
+                                @endif<br>
+                                Guest: {{count($item->guests)}}
+                            </td>
                             <td class="font-w600">{{$item->name}}</td>
                             <td class="font-w600">{{$item->phone}}</td>
                             <td class="font-w600">{{$item->email}}</td>
@@ -372,6 +382,28 @@
                                                                 <th>লিঙ্গ</th>
                                                                 <td>{{$guest->gender}}</td>
                                                             </tr>
+                                                            <tr>
+                                                                <th>Guest Type</th>
+                                                                <td>
+
+                                                                    @if($guest->guest_type == 1)
+                                                                        Extra
+                                                                    @else
+                                                                        Non Extra
+                                                                    @endif
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th>Guest Verified</th>
+                                                                <td>
+
+                                                                    @if($guest->is_verified == 1)
+                                                                        Yes
+                                                                    @else
+                                                                        No
+                                                                    @endif
+                                                                </td>
+                                                            </tr>
                                                         </table>
 
                                                     @endforeach
@@ -414,12 +446,22 @@
                                                             <th>ডেলিভারির মাধ্যম</th>
                                                             <td>{{$item->gift->delivery_type}}</td>
                                                         </tr>
-                                                        @if($item->gift->delivery_type == "বর্তমান ঠিকানা")
-                                                            <tr>
-                                                                <th> ঠিকানা</th>
-                                                                <td>{{$item->gift->relation}}</td>
-                                                            </tr>
-                                                        @endif
+                                                        <tr>
+                                                            <th>Address</th>
+                                                            <td>
+                                                                @if($item->gift->address != null)
+                                                                    {{$item->gift->address}}
+                                                                @else
+                                                                    Venue
+                                                                @endif
+                                                            </td>
+                                                        </tr>
+                                                        {{-- @if($item->gift->delivery_type == "বর্তমান ঠিকানা")
+                                                             <tr>
+                                                                 <th> ঠিকানা</th>
+                                                                 <td>{{$item->gift->relation}}</td>
+                                                             </tr>
+                                                         @endif--}}
 
                                                     </table>
                                                 @endif
@@ -454,21 +496,23 @@
                                                 </button>
                                             </div>
                                             <div class="modal-body">
-                                                @if($item->payment != null)
+                                                @if(count($item->payments)>0)
+                                                    @foreach($item->payments as $payment)
 
-                                                    <table class="table table-bordered table-striped table-vcenter">
-                                                        <tr>
-                                                            <th>Transaction Id</th>
-                                                            <td>{{$item->payment->tran_id}}</td>
-                                                        </tr>
+                                                        <table class="table table-bordered table-striped table-vcenter">
+                                                            <tr>
+                                                                <th>Transaction Id</th>
+                                                                <td>{{$payment->tran_id}}</td>
+                                                            </tr>
 
-                                                        <tr>
-                                                            <th> TK</th>
-                                                            <td>{{$item->payment->amount}}</td>
-                                                        </tr>
+                                                            <tr>
+                                                                <th> TK</th>
+                                                                <td>{{$payment->amount}}</td>
+                                                            </tr>
 
 
-                                                    </table>
+                                                        </table>
+                                                    @endforeach
                                                 @else
                                                     <span class="text-danger">Not Payment </span>
                                                 @endif
@@ -487,6 +531,11 @@
 
 
                             <td class="d-none d-sm-table-cell">
+                                {{getDateFormat($item->created_at)}}
+
+                            </td>
+
+                            <td class="d-none d-sm-table-cell">
 
                                 @if($item->is_payment==1)
                                     <span class="badge bg-primary">Yes  </span>
@@ -501,6 +550,11 @@
                                 <!-- <img src="{{$item->profile_pic}}"  class="img-thumbnail" width="75" /> -->
 
                                 <a href="/pdf/{{$item->registration_id}}.pdf" download>Download</a>
+                                @if(file_exists( public_path().'/pdf/guest_'.$item->registration_id.'.pdf' ))
+                                    Extar Guest
+                                    <a href="/pdf/guest_{{$item->registration_id}}.pdf" download>Download</a>
+                                @endif
+
                             </td>
 
                         </tr>
@@ -547,4 +601,8 @@
     @endpush
 
     <!--
+
+
+
+
 @endsection -->

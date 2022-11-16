@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 
 use App\Models\Payment;
+use App\Models\Souvenir;
 use App\Models\Student;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -23,6 +24,12 @@ class AdminController extends Controller
     public function profile()
     {
         return view("admin.setting.profile");
+    }
+
+    public function souvenirs()
+    {
+        $data= Souvenir::orderBy("created_at","DESC")->get();
+        return view("admin.souvenir.index")->with('data',$data);
     }
 
     public function profileUpdate(Request $request)
@@ -57,7 +64,7 @@ class AdminController extends Controller
 
     public function AllStudent(Request $request)
     {
-        $query = Student::with("academicQualification", "profession", "guests", "gift", 'payment')->orderBy('created_at', "DESC");
+        $query = Student::with("academicQualification", "profession", "guests", "gift", 'payments')->orderBy('created_at', "DESC");
         if ($request['reg_no'] != null) {
             $query->where('registration_id', $request['reg_no']);
         }
@@ -76,7 +83,9 @@ class AdminController extends Controller
 
     public function paymentStudent(Request $request)
     {
-        $query = Student::with("academicQualification", "profession", "guests", "gift", 'payment')->orderBy('created_at', "DESC")->where('is_payment', true);
+        $query = Student::with("academicQualification", "profession", "guests", "gift", 'payments')
+
+            ->orderBy('created_at', "DESC")->where('is_payment', true);
         if ($request['reg_no'] != null) {
             $query->where('registration_id', $request['reg_no']);
         }
@@ -95,7 +104,7 @@ class AdminController extends Controller
 
     public function nonpaymentStudent(Request $request)
     {
-        $query = Student::with("academicQualification", "profession", "guests", "gift", 'payment')->orderBy('created_at', "DESC")->where('is_payment', false);
+        $query = Student::with("academicQualification", "profession", "guests", "gift")->orderBy('created_at', "DESC")->where('is_payment', false);
         if ($request['reg_no'] != null) {
             $query->where('registration_id', $request['reg_no']);
         }

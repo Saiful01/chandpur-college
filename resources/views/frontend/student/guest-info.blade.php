@@ -1,7 +1,7 @@
 @extends("layouts.common")
 @section("content")
 
-    <div class="registration-step">
+    <div class="registration-step desktop-screen">
         <div class="container">
             <div class="row">
 
@@ -109,6 +109,114 @@
 
     </div>
 
+    <div class="registration-step mobile-screen">
+        <div class="container">
+            <div class="row">
+
+
+                <ul class="mobile-list-inline">
+                    <!-- <li class="list-inline-item">
+                        <a href="/student/personal-info">
+                            <div class="d-flex">
+                                <div class="p-t2">
+                                    <div class="number">
+                                        <h4>১</h4>
+                                    </div>
+                                </div>
+                                <div class="pf-2 next-icon"> >></div>
+                            </div>
+                            <p class="">ব্যক্তিগত তথ্যাবলী</p>
+                        </a>
+                    </li>
+
+                    <li class="list-inline-item">
+                        <a href="/student/academic-info">
+                            <div class="d-flex">
+                                <div class="p-t2">
+                                    <div class="number ">
+                                        <h4>২</h4>
+                                    </div>
+                                </div>
+                                <div class="pf-2 next-icon"> >></div>
+                            </div>
+                            <p class="">একাডেমিক তথ্যাবলী</p>
+                        </a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a href="/student/professional-info">
+                            <div class="d-flex">
+                                <div class="p-t2">
+                                    <div class="number ">
+                                        <h4>৩</h4>
+                                    </div>
+                                </div>
+                                <div class="pf-2 next-icon"> >></div>
+                            </div>
+                            <p>পেশাগত তথ্যাবলী</p>
+                        </a>
+                    </li> -->
+                    <li class="list-inline-item">
+                        <a href="/student/guest-info">
+                            <div class="d-flex">
+                                <div class="p-t2">
+                                    <div class="number active">
+                                        <h4>৪</h4>
+                                    </div>
+                                </div>
+                                <div class="pf-2 next-icon"> >></div>
+                            </div>
+                            <p style="font-size:12px;" class="reg-p-active"> পারিবারিক সদস্যের তথ্য</p>
+                        </a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a href="/student/gift-info">
+                            <div class="d-flex">
+                                <div class="p-t2">
+                                    <div class="number ">
+                                        <h4>৫</h4>
+                                    </div>
+                                </div>
+                                <div class="pf-2 next-icon"> >></div>
+                            </div>
+                            <p style="font-size:12px;">উপহার সংক্রান্ত তথ্য</p>
+                        </a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a href="/student/fee-info">
+                            <div class="d-flex">
+                                <div class="p-t2">
+                                    <div class="number ">
+                                        <h4> ৬</h4>
+                                    </div>
+                                </div>
+                                <div class="pf-2 next-icon"> >></div>
+                            </div>
+                            <p style="font-size:12px;">রেজিস্ট্রেশন ফি</p>
+                        </a>
+                    </li>
+                    <!-- <li class="list-inline-item">
+                        <a href="#">
+                            <div class="d-flex">
+                                <div class="p-t2">
+                                    <div class="number ">
+                                        <h4>৭</h4>
+                                    </div>
+                                </div>
+                                <div class="pf-2 next-icon"> >></div>
+                            </div>
+                            <p>আমন্ত্রণপত্র </p>
+                        </a>
+                    </li> -->
+
+                </ul>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
 
     <section class="form-area">
         <div class="container">
@@ -130,12 +238,16 @@
 
 
                                 </label>
-                                <div ng-repeat="guest_item in guest_items">
+                                <div ng-repeat="item in guest_items">
                                     <div class="input-group row">
                                         <label for="guest_name" class="col-sm-1-12 col-form-label"></label>
                                         <div class="col-sm-1-12">
                                             <input type="text" class="form-control" name="guest_name[]" id="guest_name"
-                                                   placeholder="পারিবারিক সদস্যের নাম">
+                                                   placeholder="পারিবারিক সদস্যের নাম" ng-model="guest_name" ng-value="'@{{ item['guest_name'] }}'">
+
+
+
+
                                         </div>
                                     </div>
 
@@ -165,7 +277,7 @@
                                         <label for="age" class="col-sm-1-12 col-form-label"></label>
                                         <div class="col-sm-1-12">
                                             <input type="text" class="form-control" name="age[]" id="age"
-                                                   placeholder="বয়স">
+                                                   placeholder="বয়স" ng-model="age" ng-value="'@{{ item['age'] }}'">
                                         </div>
                                     </div>
                                     <div class="input-group row pt-2">
@@ -222,5 +334,41 @@
             </div>
         </div>
     </section>
+
+
+    <script>
+
+        app.controller('myController', function ($scope, $http) {
+            console.log("guest ok")
+
+
+
+
+
+            $scope.guest_items =  <?php echo $guest_items ?>;
+            if ($scope.guest_items.length <= 0) {
+                $scope.guest_items = [{}];
+            } else {
+                $scope.guest_items =  <?php echo $guest_items ?>;
+            }
+
+            console.log($scope.guest_items)
+
+
+            $scope.addNewGuest = function () {
+                var guestItem = $scope.guest_items.length + 1;
+                $scope.guest_items.push({'colId': 'col' + guestItem});
+
+                console.log(results);
+
+            };
+            $scope.removeGuestItem = function (index) {
+                // remove the row specified in index
+                $scope.guest_items.splice(index, 1);
+            };
+        });
+
+    </script>
+
 
 @endsection

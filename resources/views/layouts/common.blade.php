@@ -47,7 +47,7 @@
     </style>
 </head>
 <body ng-app="myApp" ng-controller="myController">
-<!-- @include('sweetalert::alert') -->
+ @include('sweetalert::alert')
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
@@ -77,8 +77,14 @@
                     <a class="nav-link" href="#">প্রকাশনা </a>
                 </li>
 
-                <li class="nav-item">
+               {{-- <li class="nav-item">
                     <a class="nav-link" href="#">যোগাযোগ </a>
+                </li>--}}
+                <li class="nav-item">
+                    <a class="nav-link" href="/download/ticket">ডাউনলোড টিকেট  </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/guest/ticket">গেস্ট টিকেট </a>
                 </li>
 
 
@@ -254,7 +260,7 @@
 
 <script>
 
-        (function () {
+     /*   (function () {
             const second = 1000,
                 minute = second * 60,
                 hour = minute * 60,
@@ -290,41 +296,12 @@
 
                     //seconds
                 }, 0)
-        }());
+        }());*/
 
 </script>
 
 
-<script>
 
-
-    app.controller('myController', function ($scope, $http) {
-        console.log("guest ok")
-
-
-        $scope.guest_items = [{}];
-        $scope.addNewGuest = function () {
-            var guestItem = $scope.guest_items.length + 1;
-            $scope.guest_items.push({'colId': 'col' + guestItem});
-
-            console.log(guestItem);
-            console.log($scope.guest_items);
-
-
-            console.log(results);
-
-
-        };
-        $scope.removeGuestItem = function (index) {
-            // remove the row specified in index
-            $scope.guest_items.splice(index, 1);
-        };
-
-
-    });
-
-
-</script>
 
 
 </body>

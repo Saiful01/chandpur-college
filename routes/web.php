@@ -26,6 +26,7 @@ Route::any('/forget-password', [AdminAuth::class, 'forgetPassword']);
 Route::any('/reset-password/{id}', [AdminAuth::class, 'resetPassword']);
 
 
+
 Route::group(['middleware' => 'admin'], function () {
 
     Route::get('/dashboard', [AdminController::class, 'dashboard']);
@@ -35,6 +36,9 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('/profile', [AdminController::class, 'profile']);
     Route::post('/profile-update', [AdminController::class, 'profileUpdate']);
     Route::get('/log-out', [AdminController::class, 'logOut']);
+
+
+    Route::get('/souvenirs', [AdminController::class, 'souvenirs']);
 
 
     Route::get('/all-students', [AdminController::class, 'AllStudent']);
@@ -57,6 +61,21 @@ Route::any('/terms-condition', [Controller::class, 'termscondition']);
 Route::any('/refund-policy', [Controller::class, 'refundpolicy']);
 Route::get('/post-details/{id}', [Controller::class, 'postDetails']);
 Route::get('/registration', [Controller::class, 'registration']);
+
+
+##New Routes start
+
+Route::any('/download/ticket', [Controller::class, 'downloadTicket']);
+Route::any('/otp-verify/{phone}', [Controller::class, 'otpVerify']);
+Route::any('/otp-check/{phone}/{otp}', [Controller::class, 'otpCheck']);
+
+Route::any('/guest/ticket', [Controller::class, 'guestTicket']);
+Route::any('/guest/payment', [Controller::class, 'guestPayment']);
+Route::any('/guest/ticket-download', [Controller::class, 'guestTicketDownload']);
+
+Route::any('/souvenir', [Controller::class, 'souvenir']);
+
+##New Routes end
 
 Route::group(['prefix' => 'student'], function () {
     Route::any('/personal-info', [Controller::class, 'personalInfo']);

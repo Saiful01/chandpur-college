@@ -1,7 +1,7 @@
 @extends("layouts.common")
 @section("content")
 
-    <div class="registration-step">
+    <div class="registration-step desktop-screen">
         <div class="container">
             <div class="row">
 
@@ -111,6 +111,116 @@
 
     </div>
 
+
+    <div class="registration-step mobile-screen">
+        <div class="container">
+            <div class="row">
+
+
+                <ul class="mobile-list-inline">
+                    <!-- <li class="list-inline-item">
+                        <a href="/student/personal-info">
+                            <div class="d-flex">
+                                <div class="p-t2">
+                                    <div class="number">
+                                        <h4>১</h4>
+                                    </div>
+                                </div>
+                                <div class="pf-2 next-icon"> >></div>
+                            </div>
+                            <p class="">ব্যক্তিগত তথ্যাবলী</p>
+                        </a>
+                    </li>
+
+                    <li class="list-inline-item">
+                        <a href="/student/academic-info">
+                            <div class="d-flex">
+                                <div class="p-t2">
+                                    <div class="number ">
+                                        <h4>২</h4>
+                                    </div>
+                                </div>
+                                <div class="pf-2 next-icon"> >></div>
+                            </div>
+                            <p class="">একাডেমিক তথ্যাবলী</p>
+                        </a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a href="/student/professional-info">
+                            <div class="d-flex">
+                                <div class="p-t2">
+                                    <div class="number ">
+                                        <h4>৩</h4>
+                                    </div>
+                                </div>
+                                <div class="pf-2 next-icon"> >></div>
+                            </div>
+                            <p>পেশাগত তথ্যাবলী</p>
+                        </a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a href="/student/guest-info">
+                            <div class="d-flex">
+                                <div class="p-t2">
+                                    <div class="number ">
+                                        <h4>৪</h4>
+                                    </div>
+                                </div>
+                                <div class="pf-2 next-icon"> >></div>
+                            </div>
+                            <p> পারিবারিক সদস্যের তথ্যাবলী
+
+                            </p>
+                        </a>
+                    </li> -->
+                    <li class="list-inline-item">
+                        <a href="/student/gift-info">
+                            <div class="d-flex">
+                                <div class="p-t2">
+                                    <div class="number active">
+                                        <h4>৫</h4>
+                                    </div>
+                                </div>
+                                <div class="pf-2 next-icon"> >></div>
+                            </div>
+                            <p style="font-size:12px;" class="reg-p-active">উপহার সংক্রান্ত তথ্যাবলী</p>
+                        </a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a href="/student/fee-info">
+                            <div class="d-flex">
+                                <div class="p-t2">
+                                    <div class="number ">
+                                        <h4> ৬</h4>
+                                    </div>
+                                </div>
+                                <div class="pf-2 next-icon"> >></div>
+                            </div>
+                            <p style="font-size:12px;">রেজিস্ট্রেশন ফি</p>
+                        </a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a href="#">
+                            <div class="d-flex">
+                                <div class="p-t2">
+                                    <div class="number ">
+                                        <h4>৭</h4>
+                                    </div>
+                                </div>
+                                <div class="pf-2 next-icon"> >></div>
+                            </div>
+                            <p style="font-size:12px;">আমন্ত্রণপত্র </p>
+                        </a>
+                    </li>
+
+                </ul>
+
+
+            </div>
+
+        </div>
+
+    </div>
 
     <section class="form-area">
         <div class="container">

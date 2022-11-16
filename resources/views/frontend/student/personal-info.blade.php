@@ -1,7 +1,7 @@
 @extends("layouts.common")
 @section("content")
 
-    <div class="registration-step">
+    <div class="registration-step desktop-screen">
         <div class="container">
             <div class="row">
 
@@ -31,7 +31,7 @@
                                 </div>
                                 <div class="pf-2 next-icon"> >></div>
                             </div>
-                            <p>এাডেমিক তথ্যাবলী</p>
+                            <p>একাডেমিক তথ্যাবলী</p>
                         </a>
                     </li>
                     <li class="list-inline-item">
@@ -111,6 +111,116 @@
 
     </div>
 
+    <div class="registration-step mobile-screen">
+        <div class="container-fluid">
+            <div class="row">
+
+
+                <ul class="mobile-list-inline">
+                    <li class="list-inline-item">
+                        <a href="/student/personal-info">
+                            <div class="d-flex">
+                                <div class="p-t2">
+                                    <div class="number active">
+                                        <h4>১</h4>
+                                    </div>
+                                </div>
+                                <div class="pf-2 next-icon"> >></div>
+                            </div>
+                            <p style="font-size:12px;" class="reg-p-active">ব্যক্তিগত তথ্য</p>
+                        </a>
+                    </li>
+
+                    <li class="list-inline-item">
+                        <a href="/student/academic-info">
+                            <div class="d-flex">
+                                <div class="p-t2">
+                                    <div class="number ">
+                                        <h4>২</h4>
+                                    </div>
+                                </div>
+                                <div class="pf-2 next-icon"> >></div>
+                            </div>
+                            <p style="font-size:12px;">এাডেমিক তথ্য</p>
+                        </a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a href="/student/professional-info">
+                            <div class="d-flex">
+                                <div class="p-t2">
+                                    <div class="number ">
+                                        <h4>৩</h4>
+                                    </div>
+                                </div>
+                                <div class="pf-2 next-icon"> >></div>
+                            </div>
+                            <p style="font-size:12px;">পেশাগত তথ্য</p>
+                        </a>
+                    </li>
+                    <!-- <li class="list-inline-item">
+                        <a href="/student/guest-info">
+                            <div class="d-flex">
+                                <div class="p-t2">
+                                    <div class="number ">
+                                        <h4>৪</h4>
+                                    </div>
+                                </div>
+                                <div class="pf-2 next-icon"> >></div>
+                            </div>
+                            <p> পারিবারিক সদস্যের তথ্যাবলী
+
+                            </p>
+                        </a>
+                    </li> -->
+                    <!-- <li class="list-inline-item">
+                        <a href="/student/gift-info">
+                            <div class="d-flex">
+                                <div class="p-t2">
+                                    <div class="number ">
+                                        <h4>৫</h4>
+                                    </div>
+                                </div>
+                                <div class="pf-2 next-icon"> >></div>
+                            </div>
+                            <p>উপহার সংক্রান্ত তথ্যাবলী</p>
+                        </a>
+                    </li> -->
+                    <!-- <li class="list-inline-item">
+                        <a href="/student/fee-info">
+                            <div class="d-flex">
+                                <div class="p-t2">
+                                    <div class="number ">
+                                        <h4> ৬</h4>
+                                    </div>
+                                </div>
+                                <div class="pf-2 next-icon"> >></div>
+                            </div>
+                            <p>রেজস্ট্রেশন ফি</p>
+                        </a>
+                    </li> -->
+                    <!-- <li class="list-inline-item">
+                        <a href="#">
+                            <div class="d-flex">
+                                <div class="p-t2">
+                                    <div class="number ">
+                                        <h4>৭</h4>
+                                    </div>
+                                </div>
+                                <div class="pf-2 next-icon"> >></div>
+                            </div>
+                            <p>আমন্ত্রণপত্র </p>
+                        </a>
+                    </li> -->
+
+                </ul>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
 
     <section class="form-area">
         <div class="container">
@@ -129,8 +239,8 @@
                                     <div class="input-group row">
                                         <label for="name" class="col-sm-12 col-form-label"></label>
                                         <div class="col-sm-12">
-                                            <input type="text" required class="form-control" name="name" id="name"
-                                                   placeholder="বাংলা নাম:*">
+                                            <input style="border: 1px solid red;" type="text" required class="form-control" name="name" id="name"
+                                                   placeholder="বাংলা নাম: *">
                                             <input type="hidden" name="_token" value="{{csrf_token()}}">
                                         </div>
                                     </div>
@@ -138,9 +248,9 @@
                                         <label for="name" class="col-sm-12 col-form-label"></label>
                                         <div class="col-sm-12">
                                             <p style="color:red;">আপনার নাম ইংরেজিতে লিখুন</p>
-                                            <input type="text" required class="form-control" name="eng_name"
+                                            <input style="border: 1px solid red;" type="text" required class="form-control" name="eng_name"
                                                    id="eng_name"
-                                                   placeholder="ইংরেজি নাম:">
+                                                   placeholder="ইংরেজি নাম: *">
 
                                         </div>
                                     </div>
@@ -193,8 +303,8 @@
                                     <div class="input-group row">
                                         <label for="phone" class="col-sm-1-12 col-form-label"></label>
                                         <div class="col-sm-1-12">
-                                            <input type="text" class="form-control" name="phone" id="phone" required
-                                                   placeholder=" মোবাইল নাম্বার:">
+                                            <input style="border: 1px solid red;" type="text" class="form-control" name="phone" id="phone" required
+                                                   placeholder=" মোবাইল নাম্বার: *">
                                         </div>
                                     </div>
 
@@ -209,9 +319,9 @@
                                     <div class="input-group row">
                                         <label for="address" class="col-sm-1-12 col-form-label"></label>
                                         <div class="col-sm-1-12">
-                                            <input required type="text" class="form-control" name="address"
+                                            <input style="border: 1px solid red;" required type="text" class="form-control" name="address"
                                                    id="address"
-                                                   placeholder="বর্তমান ঠিকানা:">
+                                                   placeholder="বর্তমান ঠিকানা: *">
                                         </div>
                                     </div>
 
@@ -254,7 +364,7 @@
                                         <label for="image" class="col-sm-1-12 col-form-label"></label>
                                         <div class="col-sm-1-12">
                                             <p style="color:red;">আপনার পাসপোর্ট সাইজের ছবি প্রদান করুন</p>
-                                            <input type="file" class="form-control" name="image" id="image" required>
+                                            <input style="border: 1px solid red;" type="file" class="form-control" name="image" id="image" required>
                                         </div>
                                     </div>
 

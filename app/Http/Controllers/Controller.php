@@ -6,9 +6,11 @@ use App\Library\SslCommerz\SslCommerzNotification;
 use App\Models\AcademicQualification;
 use App\Models\GiftDelivery;
 use App\Models\GuestInfo;
+use App\Models\Otp;
 use App\Models\Payment;
 use App\Models\Post;
 use App\Models\ProfessionalExperinece;
+use App\Models\Souvenir;
 use App\Models\Student;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
@@ -22,6 +24,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 use RealRashid\SweetAlert\Facades\Alert;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class Controller extends BaseController
 {
@@ -297,18 +300,17 @@ class Controller extends BaseController
         if ($request->isMethod("POST")) {
 
 
-          //  return $request->all();
+            //  return $request->all();
 
             try {
                 if (implode(null, $request['guest_name']) == null) {
 
                     return Redirect::to("/student/gift-info");
                 }
-               // return $request->all();
+                // return $request->all();
 
-
+                GuestInfo::where('student_id', $request['student_id'])->delete();
                 $i = 0;
-
                 foreach ($request['guest_name'] as $item) {
 
                     $array = [
@@ -322,7 +324,7 @@ class Controller extends BaseController
                     $i++;
                 }
                 Student::where('id', (Session::get("student_id")))->update([
-                    'is_guest'=>true
+                    'is_guest' => true
                 ]);
 
 
@@ -333,10 +335,13 @@ class Controller extends BaseController
                 return back();
             }
         }
-        $student = Student::where('id', (Session::get("student_id")))->first();
 
+        $guest = GuestInfo::where('student_id', (Session::get("student_id")))->get();
+
+        $student = Student::where('id', (Session::get("student_id")))->first();
         return view("frontend.student.guest-info")
             ->with("student", $student)
+            ->with("guest_items", $guest)
             ->with("student_id", (Session::get("student_id")));
     }
 
@@ -452,7 +457,40 @@ class Controller extends BaseController
 
     public function invitationInfo(Request $request)
     {
+
+
         //return $request->all();
+
+        if ($request['value_c'] == "guest") {
+
+            foreach (json_decode($request['value_b']) as $item) {
+                try {
+                    GuestInfo::where('id', $item)->update([
+                        'is_verified' => true
+                    ]);
+                } catch (\Exception $exception) {
+                    //Alert::error("Success", $exception->getMessage());
+                    return back();
+                }
+            }
+
+            $array = [
+                'tran_id' => $request['tran_id'],
+                'student_id' => $request['value_a'],
+                'ssl_data' => json_encode($request->all()),
+                'amount' => $request['amount'],
+                'type' => "Ticket",
+            ];
+            try {
+                Payment::create($array);
+            } catch (\Exception $exception) {
+                return $exception->getMessage();
+            }
+
+            Session::put("data", $request['value_b']);
+            return Redirect::to("/guest/ticket-download");
+        }
+
         if (Session::get("student_id") == null) {
             return Redirect::to("/student/personal-info");
         }
@@ -511,6 +549,8 @@ class Controller extends BaseController
 
         $student = Student::where('id', Session::get("student_id"))->first();
 
+        $guest_count = GuestInfo::where('student_id', $student->id)->count();
+
 
         if ($request['value_a'] == "current") {
             return view("frontend.current_student.invitation-info")
@@ -534,6 +574,7 @@ class Controller extends BaseController
                 't_shirt_size' => $student->t_shirt_size,
                 'education_year' => $student->education_year,
                 'profile_pic' => $student->profile_pic,
+                'guest_count' => $guest_count,
                 'logo' => "/frontend/img/header-logo.png",
                 'sign1' => "/frontend/img/asit-signature.png",
                 'sign2' => "/frontend/img/jillur-rahman.png",
@@ -563,15 +604,21 @@ class Controller extends BaseController
                 File::makeDirectory($path);
             }
 
+            /*$pdf = Pdf::loadView('ticket', $data);
+            return $pdf->stream();*/
+
             Pdf::loadView('ticket', $data)->save($path . '/' . $fileName);
 
-
-            Mail::send('email-template.confirm', $data, function ($message) use ($data, $invoice) {
-                $message->to($data['email'])
-                    ->subject($data['subject']);
-                $message->from('asad.livingbrands@gmail.com', $data['subject']);
-                $message->attach(public_path() . "/pdf/$invoice.pdf");
-            });
+            try {
+                Mail::send('email-template.confirm', $data, function ($message) use ($data, $invoice) {
+                    $message->to($data['email'])
+                        ->subject($data['subject']);
+                    $message->from('asad.livingbrands@gmail.com', $data['subject']);
+                    $message->attach(public_path() . "/pdf/$invoice.pdf");
+                });
+            } catch (\Exception $exception) {
+                //return $exception->getMessage();
+            }
             //  return "ok";
             Session::forget('student_id');
 
@@ -854,6 +901,8 @@ class Controller extends BaseController
     public function test()
     {
 
+        return QrCode::size(140)->generate("123456");
+
         $payments = Payment::all();
         foreach ($payments as $item) {
             Student::where('id', $item->student_id)->update([
@@ -863,5 +912,220 @@ class Controller extends BaseController
         return "ok";
 
         return view("test");
+    }
+
+    public function downloadTicket()
+    {
+        return view("ticket-download");
+    }
+
+    public function otpVerify($phone)
+    {
+        $otp = rand(1000, 9999);
+        $sms = "Your verification code is " . $otp;
+
+        $is_exist = Student::where('phone', $phone)->first();
+        if (is_null($is_exist)) {
+            return 201;
+        } else {
+            Otp::create([
+                'otp' => $otp,
+                'phone' => $phone,
+            ]);
+            sendSms($phone, $sms);
+
+            return 200;
+        }
+
+    }
+
+    public function otpCheck($phone, $otp)
+    {
+
+        $is_exist = Otp::where('otp', $otp)->where('phone', $phone)->first();
+        if (is_null($is_exist)) {
+            return 0;
+        } else {
+            $is_exist = Student::where('phone', $phone)->where('is_payment', true)->first();
+            if (is_null($is_exist)) {
+                return 0;
+            }
+
+            Session::put("student_id", $is_exist->id);
+            return $is_exist->registration_id;
+        }
+    }
+
+    public function guestTicket()
+    {
+        return view("guest-ticket");
+    }
+
+    public function guestPayment(Request $request)
+    {
+        //return $request->all();
+
+        if (Session::get("student_id") == null) {
+            return redirect()->back();
+        }
+        $i = 0;
+        $total = 0;
+        $arr = [];
+        foreach ($request['guest_name'] as $item) {
+
+            $array = [
+                'student_id' => Session::get("student_id"),
+                'guest_name' => $item,
+                'relation' => $request['relation'][$i],
+                'age' => $request['age'][$i],
+                'gender' => $request['gender'][$i],
+                'is_verified' => 0,
+                'guest_type' => 1,
+            ];
+            $id = GuestInfo::insertGetId($array);
+
+            $arr[] = $id;
+            $i++;
+            $total = $total + getGuestFee();
+        }
+
+        $post_data = array();
+        $post_data['total_amount'] = $total; # You cant not pay less than 10
+        $post_data['currency'] = "BDT";
+        $post_data['tran_id'] = uniqid(); // tran_id must be unique
+
+        # CUSTOMER INFORMATION
+        $post_data['cus_name'] = 'Customer Name';
+        $post_data['cus_email'] = 'customer@mail.com';
+        $post_data['cus_add1'] = 'Customer Address';
+        $post_data['cus_add2'] = "";
+        $post_data['cus_city'] = "";
+        $post_data['cus_state'] = "";
+        $post_data['cus_postcode'] = "";
+        $post_data['cus_country'] = "Bangladesh";
+        $post_data['cus_phone'] = '8801XXXXXXXXX';
+        $post_data['cus_fax'] = "";
+
+        # SHIPMENT INFORMATION
+        $post_data['ship_name'] = "Store Test";
+        $post_data['ship_add1'] = "Dhaka";
+        $post_data['ship_add2'] = "Dhaka";
+        $post_data['ship_city'] = "Dhaka";
+        $post_data['ship_state'] = "Dhaka";
+        $post_data['ship_postcode'] = "1000";
+        $post_data['ship_phone'] = "";
+        $post_data['ship_country'] = "Bangladesh";
+
+        $post_data['shipping_method'] = "NO";
+        $post_data['product_name'] = "Computer";
+        $post_data['product_category'] = "Goods";
+        $post_data['product_profile'] = "physical-goods";
+
+        # OPTIONAL PARAMETERS
+        $post_data['value_a'] = Session::get("student_id");
+        $post_data['value_b'] = json_encode($arr);
+        $post_data['value_c'] = "guest";
+        $post_data['value_d'] = "ref004";
+
+
+        $sslc = new SslCommerzNotification();
+        # initiate(Transaction Data , false: Redirect to SSLCOMMERZ gateway/ true: Show all the Payement gateway here )
+        $payment_options = $sslc->makePayment($post_data, 'hosted');
+
+        if (!is_array($payment_options)) {
+            print_r($payment_options);
+            $payment_options = array();
+        }
+
+    }
+
+    public function guestTicketDownload(Request $request)
+    {
+        $data = Session::get('data');
+        if (Session::get('data') == null) {
+            return Redirect::to("/");
+        }
+
+
+        $guest_data = GuestInfo::whereIn('id', json_decode($data, true))->get();
+
+        $student = Student::where('id', Session::get("student_id"))->first();
+
+        $data = [
+            'invoice' => $student->registration_id,
+            'guest_data' => $guest_data,
+
+            'logo' => "/frontend/img/header-logo.png",
+            'sign1' => "/frontend/img/asit-signature.png",
+            'sign2' => "/frontend/img/jillur-rahman.png",
+            'sign3' => "/frontend/img/ratan-signature.png",
+            'subject' => "অংশ হোন ৭৫ বছরের ঐতিহ্যের রেজিস্ট্রেশন ",
+        ];
+
+        $fileName = "guest_" . $student->registration_id . ".pdf";
+
+
+        Pdf::loadView('guest-pdf-ticket', $data)->save("pdf" . '/' . $fileName);
+
+
+        /* $pdf = Pdf::loadView('guest-pdf-ticket', $data);
+         $pdf->setOption(['dpi' => 150, 'defaultFont' => 'Siyamrupali']);
+         //return $pdf->download();
+         return $pdf->stream();*/
+
+
+        return view("guest-ticket-download")
+            ->with('guest_data', $guest_data)
+            ->with('student', $student)
+            ->with('fileName', $fileName);
+    }
+
+    public function souvenir(Request $request)
+    {
+
+
+        $picture_file = [];
+
+        if ($request->hasFile('picture')) {
+            foreach ($request['picture'] as $picture) {
+                $picture_name = time() . '.' . $picture->getClientOriginalExtension();
+                $destinationPath = public_path('/uploads/picture');
+                $picture->move($destinationPath, $picture_name);
+                $picture_file[] = '/uploads/picture/' . $picture_name;
+
+            }
+        }
+
+        $passport_file = "";
+        if ($request->hasFile('passport')) {
+            $passport = $request->file('passport');
+            $passport_name = time() . '.' . $passport->getClientOriginalExtension();
+            $destinationPath = public_path('/uploads/passport');
+            $passport->move($destinationPath, $passport_name);
+            $passport_file = '/uploads/passport/' . $passport_name;
+        }
+
+
+        try {
+            Souvenir::create([
+                'name' => $request->name,
+                'course' => $request->course,
+                'subject' => $request->subject,
+                'batch' => $request->batch,
+                'email' => $request->email,
+                'mobile' => $request->mobile,
+                'passport' => $passport_file,
+                'writeup' => $request['writeup'],
+                'pictures' => json_encode($picture_file),
+            ]);
+
+            Alert::success("Success", "Successfully Submitted");
+
+        } catch (\Exception $e) {
+            return $e->getMessage();
+        }
+
+        return back();
+
     }
 }

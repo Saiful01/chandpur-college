@@ -21,17 +21,19 @@
         }
 
         li {
-            padding-bottom: 15px;
+            padding-bottom: 10px;
         }
 
         .text-center {
             text-align: center;
         }
+
         .logo-img {
             width: 120px;
-            height: 120px;
+            height: 60px;
             margin: auto;
         }
+
         .full-row {
             width: 100%;
             height: 200px;
@@ -44,21 +46,25 @@
             margin-top: 70px;
 
         }
+
         .second-img {
             width: 30%;
             margin-top: 70px;
 
         }
+
         .third-img {
             width: 30%;
             margin-top: 70px;
 
         }
-        .full-width{
+
+        .full-width {
             width: 100%;
             height: auto;
             margin-bottom: 120px;
         }
+
         .left-half-70 {
             width: 70%;
             float: left;
@@ -81,17 +87,22 @@
 <div class="ticket-area">
     <div class="ticket-content">
         <div class="logo-img">
-            <img src="{{ public_path( $logo) }}" />
+            <img src="{{ public_path( $logo) }}" style="height: 100px"/>
         </div>
 
 
-
-
-
         <h4 class="text-center" style="font-size: 30px">Invitation Letter</h4>
-        <div class="full-width">
+        <div class="full-width" style="height: 120px">
             <div class="left-half-70">
                 <table>
+                    <tr>
+                        <td>
+                            <img class=""
+                                 style="border: 1px solid #f3efef; height: 100px; width: 100px; object-fit: contain; margin-bottom: 10px"
+                                 src="{{ public_path( $profile_pic) }}" alt="User"/>
+                        </td>
+
+                    </tr>
                     <tr>
                         <td>
                             <strong>Name</strong>
@@ -124,6 +135,15 @@
                             : Chandpur Government College, Chandpur.
                         </td>
                     </tr>
+                    <tr>
+                        <td>
+                            <strong>No of Guest:</strong>
+                        </td>
+                        <td>
+                            : {{$guest_count}}
+                        </td>
+                    </tr>
+
                 </table>
             </div>
             <div class="right-half-30">
@@ -132,35 +152,35 @@
             </div>
         </div>
 
+        <div class="full-width">
+            <h4 style="text-align: left; margin-bottom: -15px"> Detailed Rules</h4>
+            <ul class="rule">
 
-        <h4> Detailed Rules</h4>
+                <li>
+                    1. It is mandatory for the college students or their accompanying guests to carry the
+                    registration card for three days of the event.
+                    No entry to the venue or collection of food is permitted without registration card.
+                </li>
+                <li>2. All invited students and guests are requested to keep their
+                    registration card visible at all times to ensure security.
+                    Volunteers can check the registration card at any time.
+                </li>
+                <li>3. Registration will be considered as food coupon for the event.
+                    The registration card must be presented every time the food is collected.
+                </li>
+                <li>4. The registration card must also be presented in case of collection
+                    of gift items from the booth mentioned in the card.
+                </li>
 
-        <ul class="rule">
-            <li>
-                1. It is mandatory for the college students or their accompanying guests to carry the
-                registration card for three days of the event.
-                No entry to the venue or collection of food is permitted without registration card.
-            </li>
-            <li>2. All invited students and guests are requested to keep their
-                registration card visible at all times to ensure security.
-                Volunteers can check the registration card at any time.
-            </li>
-            <li>3. Registration will be considered as food coupon for the event.
-                The registration card must be presented every time the food is collected.
-            </li>
-            <li>4. The registration card must also be presented in case of collection
-                of gift items from the booth mentioned in the card.
-            </li>
+            </ul>
 
-        </ul>
+        </div>
         <div class="full-row">
             <img class="first-img" src="{{ public_path( $sign1) }}" alt="asit-signature"/>
             <img class="second-img" src="{{ public_path( $sign2) }}" alt="jillur-rahman"/>
 
             <img class="third-img" src="{{ public_path( $sign3) }}" alt="ratan-signature"/>
         </div>
-
-
 
 
     </div>

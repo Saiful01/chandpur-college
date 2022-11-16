@@ -105,7 +105,7 @@
                         <th>Profession</th>
                         <th>Guest</th>
                         <th>Gift</th>
-                        <th>Payment</th>
+
                         <th class="d-none d-sm-table-cell">Payment Status</th>
                         <th class="d-none d-sm-table-cell">Invitation Letter</th>
 
@@ -117,7 +117,9 @@
                     @foreach($result as $item)
                         <tr>
                             <td class="text-center">{{$i++}}</td>
-                            <td class="font-w600">{{$item->registration_id}}</td>
+                            <td class="font-w600">{{$item->registration_id}}
+
+                            </td>
                             <td class="font-w600">{{$item->name}}</td>
                             <td class="font-w600">{{$item->phone}}</td>
                             <td class="font-w600">{{$item->email}}</td>
@@ -372,6 +374,29 @@
                                                                 <th>লিঙ্গ</th>
                                                                 <td>{{$guest->gender}}</td>
                                                             </tr>
+
+                                                            <tr>
+                                                                <th>Guest Type</th>
+                                                                <td>
+
+                                                                    @if($guest->guest_type == 1)
+                                                                        Extra
+                                                                    @else
+                                                                        Non Extra
+                                                                    @endif
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th>Guest Verified</th>
+                                                                <td>
+
+                                                                    @if($guest->is_verified == 1)
+                                                                        Yes
+                                                                    @else
+                                                                        No
+                                                                    @endif
+                                                                </td>
+                                                            </tr>
                                                         </table>
 
                                                     @endforeach
@@ -414,12 +439,22 @@
                                                             <th>ডেলিভারির মাধ্যম</th>
                                                             <td>{{$item->gift->delivery_type}}</td>
                                                         </tr>
-                                                        @if($item->gift->delivery_type == "বর্তমান ঠিকানা")
+                                                        <tr>
+                                                            <th>Address</th>
+                                                            <td>
+                                                                @if($item->gift->address != null)
+                                                                    {{$item->gift->address}}
+                                                                @else
+                                                                    Venue
+                                                                @endif
+                                                            </td>
+                                                        </tr>
+                                                       {{-- @if($item->gift->delivery_type == "বর্তমান ঠিকানা")
                                                             <tr>
                                                                 <th> ঠিকানা</th>
                                                                 <td>{{$item->gift->relation}}</td>
                                                             </tr>
-                                                        @endif
+                                                        @endif--}}
 
                                                     </table>
                                                 @endif
@@ -435,55 +470,7 @@
                                     </div>
                                 </div>
                             </td>
-                            <td class="font-w600"><!-- Button trigger modal -->
-                                <button type="button" class="btn btn-primary" data-toggle="modal"
-                                        data-target="#paymentModalLong{{$item->id}}">
-                                    Payment
-                                </button>
 
-                                <!-- Modal -->
-                                <div class="modal fade" id="paymentModalLong{{$item->id}}" tabindex="-1" role="dialog"
-                                     aria-labelledby="giftModalLongTitle" aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="QualificationModalLongTitle">Payment</h5>
-                                                <button type="button" class="close" data-dismiss="modal"
-                                                        aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                            <div class="modal-body">
-                                                @if($item->payment != null)
-
-                                                    <table class="table table-bordered table-striped table-vcenter">
-                                                        <tr>
-                                                            <th>Transaction Id</th>
-                                                            <td>{{$item->payment->tran_id}}</td>
-                                                        </tr>
-
-                                                        <tr>
-                                                            <th> TK</th>
-                                                            <td>{{$item->payment->amount}}</td>
-                                                        </tr>
-
-
-                                                    </table>
-                                                @else
-                                                    <span class="text-danger">Not Payment </span>
-                                                @endif
-
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">
-                                                    Close
-                                                </button>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </td>
 
 
                             <td class="d-none d-sm-table-cell">

@@ -176,7 +176,6 @@ function getGuestFee()
 function sendSms($number, $message)
 {
 
-
     $url = "https://smsc.ekshop.gov.bd/externalApi?passkey=09978bg45SD3SWQ&smsText=" . $message . "&client=motiur&number=" . $number;
 
     $client = new GuzzleHttp\Client();
