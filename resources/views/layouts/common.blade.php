@@ -47,7 +47,7 @@
     </style>
 </head>
 <body ng-app="myApp" ng-controller="myController">
- @include('sweetalert::alert')
+ <!-- @include('sweetalert::alert') -->
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">

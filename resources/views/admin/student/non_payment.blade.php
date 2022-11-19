@@ -105,7 +105,7 @@
                         <th>Profession</th>
                         <th>Guest</th>
                         <th>Gift</th>
-
+                        
                         <th class="d-none d-sm-table-cell">Payment Status</th>
                         <th class="d-none d-sm-table-cell">Invitation Letter</th>
 
