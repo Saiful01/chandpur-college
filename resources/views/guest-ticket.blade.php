@@ -12,15 +12,15 @@
                         @csrf
                         <div class="input-group row pt-2" id="phone-verify">
                             <div class="col-sm-12">
-                                <label>আপনার ফোন নাম্বার দিয়ে ভেরিফিকেশন সম্পন্ন করুন</label>
+                                <label>যার রেফারেন্সে গেস্ট রেজিস্ট্রেশন করতে চান তার রেজিস্ট্রিত  মোবাইল  নাম্বার দিয়ে ভেরিফিকেশন সম্পন্ন করুন।</label>
                                 <input type="text" class="form-control" name="phone" id="phone"
-                                       placeholder=" ফোন নাম্বার  " required>
+                                       placeholder=" মোবাইল নাম্বার  " required>
                             </div>
                         </div>
 
                         <div class="input-group row pt-2" id="otp">
                             <div class="col-sm-12">
-                                <label>ওটিপি</label>
+                                <label>ওটিপি প্রদান করুন</label>
                                 <input type="text" class="form-control" name="otp" id="otp-code" placeholder="ওটিপি"
                                        required>
                             </div>
@@ -28,7 +28,7 @@
 
                         <div class="input-group row pt-2" id="get-otp">
                             <div class="col-sm-12">
-                                <button type="button" class="btn btn-warning" onclick="getOtp()">ওটিপি পান</button>
+                                <button type="button" class="btn btn-warning" onclick="getOtp()">সেন্ড ওটিপি</button>
                             </div>
                         </div>
 
@@ -59,6 +59,7 @@
                         <div class="card">
 
                             <div class="card-body">
+                                <p>***আপনি  ৭ জন পারিবারিক সদস্য রেজিস্ট্রেশন করতে পারবেন। প্রথম বার মূল রেজিস্ট্রেশনের সময় যদি ২ জন গেস্ট রেজিস্ট্রেশন থেকে থাকে তবে অতিরিক্ত আর ৫ জন গেস্ট যুক্ত করতে পারবেন। </p>
                                 <form class="" method="post" action="/guest/payment">
 
                                     @csrf
@@ -143,6 +144,26 @@
                                         সন্তান
                                         বিবেচিত হবে </p>
 
+                                        <div class="form-check">
+                                    <label class="form-check-label">
+                                        <input type="checkbox" class="form-check-input" name="" id=""
+                                               value="checkedValue" required>
+                                        আপনার উল্লেখিত তথ্যগুলো ভেরিফিকেশন করা হবে, তথ্যগত ভুল থেকে থাকলে আপনার
+                                        রেজিস্ট্রেশনটি বাতিল করা হবে এবং আইনানুগ ব্যবস্থা নেওয়া হবে।
+
+                                    </label>
+                                </div>
+                                <ul class="">
+                                    <li class="">আমি এই মর্মে প্রত্যয়ন করছি যে, উপরে প্রদত্ত আমার সকল তথ্য সঠিক এবং
+                                        নির্ভুল
+                                    </li>
+                                    <li class="">রেজিস্ট্রেশন ফি কোনোভাবেই ফেরতযোগ্য নয়</li>
+                                    <li class="">রেজিস্ট্রেশন কনফার্ম হওয়ার মোবাইল ও ই-মেইলে কনফার্মেশন মেসেজ চলে যাবে
+                                    </li>
+                                    <li class="">একজন শিক্ষার্থী (বর্তমান /প্রাক্তন ) শুধু একবারই রেজিস্ট্রেশন করতে
+                                        পারবেন
+                                    </li>
+                                </ul>
 
                                     <div class="input-group row pt-2">
                                         <div class="col-sm-12">
@@ -162,7 +183,6 @@
                         <div class="card">
 
                             <div class="card-body">
-
 
                                <p ng-bind="total"> </p>
 

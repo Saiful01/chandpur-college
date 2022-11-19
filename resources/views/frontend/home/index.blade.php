@@ -121,14 +121,14 @@
 
 
 
-    <section style="padding:50px 0 0px 0px" class="guest-section">
+   <!--<section style="padding:50px 0 0px 0px" class="guest-section">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
                     <div class="title-areas">
-                        <!-- <img style="padding:0px 0 0px 0px" src="frontend/img/special-guest.png"/> -->
-                        <img class="w-100" style="padding: 0px 0 0px 0px; left: -12px;position: relative;"
-                             src="frontend/img/3rd-colum.png"/>
+                        <img style="padding:0px 0 0px 0px" src="frontend/img/special-guest.png"/> -->
+                        <!-- <img class="w-100" style="padding: 0px 0 0px 0px; left: -12px;position: relative;"
+                             src="frontend/img/3rd-colum.png"/> -->
                         <!-- <div class="spcial-guest">
                                <div class="spcial-guest-caption">
                                   <h4>ডাঃ দীপু মনি, এমপি</h4>
@@ -138,12 +138,12 @@
                                     কলেজ কর্তৃপক্ষসহ সংশ্লিষ্ট সকলকে জানাই আন্তরিক শুভেচ্ছা।
                                    </p>
                              </div>
-                          </div> -->
+                          </div>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </section> -->
 
 
 
@@ -274,13 +274,13 @@
             </div>
             <div class="row">
                 <div class="col-md-6 sharoklipi">
-                    <h4>অংশ হোন ৭৫ বছরের ঐতিহ্যের</h4>
+                    <h4>ঐতিহ্যের উৎকর্ষে উল্লাসের ৭৫ বছর</h4>
                     <p>কলেজের প্রাক্তন শিক্ষার্থীদের অভিজ্ঞতা ও স্মরণীয় মুহুর্তগুলোকে</br> একত্রিত করে আমরা তৈরি করছি
                         একটি
                         স্মরণিকা, যা আমাদের
                         </br>মনে করিয়ে দেবে আমাদের একসাথে কাটানো স্মৃতিময় ক্ষণগুলোকে।
-                        </br>
-                        ইতিহাসের অংশ হতে আজই পাঠিয়ে দিন আপনার কলেজ জীবনের </br>স্মরণীয় যে কোনো স্মৃতির কথা।
+                
+                        ইতিহাসের অংশ হতে আজই পাঠিয়ে দিন আপনার কলেজ জীবনের স্মরণীয় যে কোনো স্মৃতির কথা।
                     </p>
                 </div>
                 <div class="col-md-6">
@@ -289,22 +289,22 @@
                             @csrf
                             <div class="input-group row">
                                 <div class="col-sm-12">
-                                    <input type="text" class="form-control" name="name" placeholder="নাম" required/>
+                                    <input style="border: 1px solid red;" type="text" class="form-control" name="name" placeholder="নাম *" required/>
                                 </div>
                             </div>
                             <div class="input-group row">
                                 <div class="col-sm-12">
-                                    <input type="text" class="form-control" name="course" placeholder="Course"required/>
+                                    <input style="border: 1px solid red;" type="text" class="form-control" name="course" placeholder="কোর্সের নাম * "required/>
                                 </div>
                             </div>
                             <div class="input-group row">
                                 <div class="col-sm-12">
-                                    <input type="text" class="form-control" name="subject" placeholder="Subject" required/>
+                                    <input style="border: 1px solid red;" type="text" class="form-control" name="subject" placeholder="বিভাগ/বিষয় *" required/>
                                 </div>
                             </div>
                             <div class="input-group row">
                                 <div class="col-sm-12">
-                                    <input type="text" class="form-control" name="batch" placeholder="Batch" required/>
+                                    <input style="border: 1px solid red;" type="text" class="form-control" name="batch" placeholder="ব্যাচ * " required/>
                                 </div>
                             </div>
                             <div class="input-group row">
@@ -314,22 +314,28 @@
                             </div>
                             <div class="input-group row">
                                 <div class="col-sm-12">
-                                    <input type="text" class="form-control" name="mobile" placeholder="Mobile" required/>
+                                    <input style="border: 1px solid red;" type="text" class="form-control" name="mobile" placeholder="মোবাইল নং * " required/>
                                 </div>
                             </div>
+                            
                             <div class="input-group row">
-                                <label>Upload Passport</label>
+                                <p style="padding-top:15px; color:red;">পাসপোর্ট সাইজ ছবি* </p>
+                               
                                 <div class="col-sm-12">
-                                    <input type="file" class="form-control" name="passport" placeholder="Passport" required/>
+                                    <input style="border: 1px solid red;" type="file" class="form-control" name="passport" placeholder="পাসপোর্ট সাইজ ছবি * " required/>
                                 </div>
                             </div>
                             <div class="input-group row">
                                 <div class="col-sm-12">
-                                    <textarea type="text" class="form-control" name="writeup" placeholder="Writeup" required></textarea>
+
+                                <p style="padding-top:15px; color:red;">*সর্বোচ্চ ২০০০ শব্দের মধ্যে লেখুন</P>
+                                    <textarea style=" border: 1px solid red;" type="text" class="form-control" name="writeup" placeholder="আপনার লেখা প্রদান করুন……" required></textarea>
+                                   
+
                                 </div>
                             </div>
                             <div class="input-group row">
-                                <label>Picture (Multiple)</label>
+                                <p style="padding-top:15px; color:red;">লেখা সম্পর্কিত ছবি(৩)</p>
                                 <div class="col-sm-12">
                                     <input type="file" class="form-control" name="picture[]" multiple/>
                                 </div>

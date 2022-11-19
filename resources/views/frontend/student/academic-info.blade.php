@@ -117,7 +117,7 @@
 
 
                 <ul class="mobile-list-inline">
-                    <!-- <li class="list-inline-item">
+                   <li class="list-inline-item">
                         <a href="/student/personal-info">
                             <div class="d-flex">
                                 <div class="p-t2">
@@ -127,9 +127,9 @@
                                 </div>
                                 <div class="pf-2 next-icon"> >></div>
                             </div>
-                            <p class="">ব্যক্তিগত তথ্যাবলী</p>
+                            <p style="font-size:12px;" class="">ব্যক্তিগত তথ্য</p>
                         </a>
-                    </li> -->
+                    </li> 
 
                     <li class="list-inline-item">
                         <a href="/student/academic-info">
@@ -157,7 +157,7 @@
                             <p style="font-size:12px;">পেশাগত তথ্য</p>
                         </a>
                     </li>
-                    <li class="list-inline-item">
+                    <!-- <li class="list-inline-item">
                         <a href="/student/guest-info">
                             <div class="d-flex">
                                 <div class="p-t2">
@@ -171,7 +171,7 @@
 
                             </p>
                         </a>
-                    </li>
+                    </li> -->
                     <!-- <li class="list-inline-item">
                         <a href="/student/gift-info">
                             <div class="d-flex">
@@ -239,7 +239,7 @@
                                     <input name="student_id" value="{{$student_id}}" type="hidden"/>
                                     <div class="input-group row pt-2">
 
-                                        <div class="col-md-12 checkbox-form">
+                                        <div style="border: 1px solid red;" class="col-md-12 checkbox-form">
                                             <label>কোর্সের নাম</label>
                                             <label class="checkbox-inline">
                                                 <input type="radio" required name="program_name" value="এইচএসসি"
@@ -303,14 +303,58 @@
 
 
                                                     <option value="">পাশের সাল: *</option>
-                                                    <option value="২০২২">২০২২</option>
-                                                    <option value="২০২১">২০২১</option>
-                                                    <option value="২০২০">২০২০</option>
-                                                    <option value="২০১৯">২০১৯</option>
-                                                    <option value="২০১৮">২০১৮</option>
-                                                    <option value="২০১৭">২০১৭</option>
-                                                    <option value="২০১৬">২০১৬</option>
                                                     <option value="২০১৫">২০১৫</option>
+                                                    <option value="২০১৪">২০১৪</option>
+                                                    <option value="২০১৩">২০১৩</option>
+                                                    <option value="২০১২">২০১২</option>
+                                                    <option value="২০১১">২০১১</option>
+                                                    <option value="২০১০">২০১০</option>
+                                                    <option value="২০০৯">২০০৯</option>
+                                                    <option value="২০০৮">২০০৮</option>
+                                                    <option value="২০০৭">২০০৭</option>
+                                                    <option value="২০০৬">২০০৬</option>
+                                                    <option value="২০০৫">২০০৫</option>
+                                                    <option value="২০০৪">২০০৪</option>
+                                                    <option value="২০০৩">২০০৩</option>
+                                                    <option value="২০০২">২০০২</option>
+                                                    <option value="২০০১">২০০১</option>
+                                                    <option value="২০০০">২০০০</option>
+                                                    <option value="১৯৯৯">১৯৯৯</option>
+                                                    <option value="১৯৯৮">১৯৯৮</option>
+                                                    <option value="১৯৯৭">১৯৯৭</option>
+                                                    <option value="১৯৯৬">১৯৯৬</option>
+                                                    <option value="১৯৯৫">১৯৯৫</option>
+                                                    <option value="৯৯৪">১৯৯৪</option>
+                                                    <option value="১৯৯৪">১৯৯৩</option>
+                                                    <option value="১৯৯২">১৯৯২</option>
+                                                    <option value="১৯৯১">১৯৯১</option>
+                                                    <option value="১৯৯০">১৯৯০</option>
+                                                    <option value="১৯৮৯">১৯৮৯</option>
+                                                    <option value="১৯৮৮">১৯৮৮</option>
+                                                    <option value="১৯৮৭">১৯৮৭</option>
+                                                    <option value="১৯৮৬">১৯৮৬</option>
+                                                    <option value="১৯৮৫">১৯৮৫</option>
+                                                    <option value="১৯৮৪">১৯৮৪</option>
+                                                    <option value="১৯৮৩">১৯৮৩</option>
+                                                    <option value="১৯৮২">১৯৮২</option>
+                                                    <option value="১৯৮১">১৯৮১</option>
+                                                    <option value="১৯৮০">১৯৮০</option>
+                                                    <option value="১৯৭৯">১৯৭৯</option>
+                                                    <option value="১৯৭৮">১৯৭৮</option>
+                                                    <option value="১৯৭৭">১৯৭৭</option>
+                                                    <option value="১৯৭৬">১৯৭৬</option>
+                                                    <option value="১৯৭৫">১৯৭৫</option>
+                                                    <option value="১৯৭৪">১৯৭৪</option>
+                                                    <option value="১৯৭৩">১৯৭৩</option>
+                                                    <option value="১৯৭২">১৯৭২</option>
+                                                    <option value="১৯৭১">১৯৭১</option>
+                                                    <option value="১৯৭০">১৯৭০</option>
+                                                    <option value="১৯৬৯">১৯৬৯</option>
+                                                    <option value="১৯৬৮">১৯৬৮</option>
+                                                    <option value="১৯৬৭">১৯৬৭</option>
+                                                    <option value="১৯৬৬">১৯৬৬</option>
+                                                    <option value="১৯৬৫">১৯৬৫</option>
+                                                    <option value="১৯৬৪">১৯৬৪</option>
 
                                                 </select>
                                             </div>
@@ -320,9 +364,63 @@
 
 
                                                     <option value="">পাশের সাল: *</option>
-                                                    <option value="২০২২">২০২২</option>
-                                                    <option value="২০২১">২০২১</option>
                                                     <option value="২০২০">২০২০</option>
+                                                    <option value="২০১৯">২০১৯</option>
+                                                    <option value="২০১৮">২০১৮</option>
+                                                    <option value="২০১৭">২০১৭</option>
+                                                    <option value="২০১৬">২০১৬</option>
+                                                    <option value="২০১৫">২০১৫</option>
+                                                    <option value="২০১৪">২০১৪</option>
+                                                    <option value="২০১৩">২০১৩</option>
+                                                    <option value="২০১২">২০১২</option>
+                                                    <option value="২০১১">২০১১</option>
+                                                    <option value="২০১০">২০১০</option>
+                                                    <option value="২০০৯">২০০৯</option>
+                                                    <option value="২০০৮">২০০৮</option>
+                                                    <option value="২০০৭">২০০৭</option>
+                                                    <option value="২০০৬">২০০৬</option>
+                                                    <option value="২০০৫">২০০৫</option>
+                                                    <option value="২০০৪">২০০৪</option>
+                                                    <option value="২০০৩">২০০৩</option>
+                                                    <option value="২০০২">২০০২</option>
+                                                    <option value="২০০১">২০০১</option>
+                                                    <option value="২০০০">২০০০</option>
+                                                    <option value="১৯৯৯">১৯৯৯</option>
+                                                    <option value="১৯৯৮">১৯৯৮</option>
+                                                    <option value="১৯৯৭">১৯৯৭</option>
+                                                    <option value="১৯৯৬">১৯৯৬</option>
+                                                    <option value="১৯৯৫">১৯৯৫</option>
+                                                    <option value="৯৯৪">১৯৯৪</option>
+                                                    <option value="১৯৯৪">১৯৯৩</option>
+                                                    <option value="১৯৯২">১৯৯২</option>
+                                                    <option value="১৯৯১">১৯৯১</option>
+                                                    <option value="১৯৯০">১৯৯০</option>
+                                                    <option value="১৯৮৯">১৯৮৯</option>
+                                                    <option value="১৯৮৮">১৯৮৮</option>
+                                                    <option value="১৯৮৭">১৯৮৭</option>
+                                                    <option value="১৯৮৬">১৯৮৬</option>
+                                                    <option value="১৯৮৫">১৯৮৫</option>
+                                                    <option value="১৯৮৪">১৯৮৪</option>
+                                                    <option value="১৯৮৩">১৯৮৩</option>
+                                                    <option value="১৯৮২">১৯৮২</option>
+                                                    <option value="১৯৮১">১৯৮১</option>
+                                                    <option value="১৯৮০">১৯৮০</option>
+                                                    <option value="১৯৭৯">১৯৭৯</option>
+                                                    <option value="১৯৭৮">১৯৭৮</option>
+                                                    <option value="১৯৭৭">১৯৭৭</option>
+                                                    <option value="১৯৭৬">১৯৭৬</option>
+                                                    <option value="১৯৭৫">১৯৭৫</option>
+                                                    <option value="১৯৭৪">১৯৭৪</option>
+                                                    <option value="১৯৭৩">১৯৭৩</option>
+                                                    <option value="১৯৭২">১৯৭২</option>
+                                                    <option value="১৯৭১">১৯৭১</option>
+                                                    <option value="১৯৭০">১৯৭০</option>
+                                                    <option value="১৯৬৯">১৯৬৯</option>
+                                                    <option value="১৯৬৮">১৯৬৮</option>
+                                                    <option value="১৯৬৭">১৯৬৭</option>
+                                                    <option value="১৯৬৬">১৯৬৬</option>
+                                                    <option value="১৯৬৫">১৯৬৫</option>
+                                                    <option value="১৯৬৪">১৯৬৪</option>
 
 
                                                 </select>

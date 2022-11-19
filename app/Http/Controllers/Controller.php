@@ -595,7 +595,7 @@ class Controller extends BaseController
                 'sign1' => "/frontend/img/asit-signature.png",
                 'sign2' => "/frontend/img/jillur-rahman.png",
                 'sign3' => "/frontend/img/ratan-signature.png",
-                'subject' => "অংশ হোন ৭৫ বছরের ঐতিহ্যের রেজিস্ট্রেশন ",
+                'subject' => "ঐতিহ্যের উৎকর্ষে উল্লাসের ৭৫ বছর ",
             ];
             $message = "Congrats! Your '75 Years Celebration and Reunion of Chandpur College' registration is Successful! Check Your Email Inbox or Spam Folder for Invitation Letter.";
 

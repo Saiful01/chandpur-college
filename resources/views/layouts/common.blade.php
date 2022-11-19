@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>ঐতিহ্য ও সাফল্যের ৭৫ বছর</title>
+    <title>ঐতিহ্যের উৎকর্ষে উল্লাসের ৭৫ বছর</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/x-icon" href="/frontend/img/header-logo.png">

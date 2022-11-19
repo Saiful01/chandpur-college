@@ -18,15 +18,15 @@
                             @csrf
                             <div class="input-group row pt-2" id="phone-verify">
                                 <div class="col-sm-12">
-                                    <label>টিকেট ডাউনলোড করতে আপনার ফোন নাম্বার দিন </label>
+                                    <label>***রেজিস্ট্রেশনের সময় প্রদান করা মোবাইল নাম্বার </label>
                                     <input type="text" class="form-control" name="phone" id="phone"
-                                           placeholder="টিকেট ডাউনলোড করতে আপনার ফোন নাম্বার দিন " required>
+                                           placeholder="মোবাইল নাম্বার " required>
                                 </div>
                             </div>
 
                             <div class="input-group row pt-2" id="otp">
                                 <div class="col-sm-12">
-                                    <label>ওটিপি</label>
+                                    <label>ওটিপি প্রদান করুন</label>
                                     <input type="text" class="form-control" name="otp" id="otp-code" placeholder="ওটিপি"
                                            required>
                                 </div>
@@ -34,7 +34,7 @@
 
                             <div class="input-group row pt-2" id="get-otp">
                                 <div class="col-sm-12">
-                                    <button type="button" class="btn btn-warning" onclick="getOtp()">ওটিপি পান</button>
+                                    <button type="button" class="btn btn-warning" onclick="getOtp()">সেন্ড ওটিপি</button>
                                 </div>
                             </div>
 

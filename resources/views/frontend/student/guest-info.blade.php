@@ -141,7 +141,7 @@
                             </div>
                             <p class="">একাডেমিক তথ্যাবলী</p>
                         </a>
-                    </li>
+                    </li> -->
                     <li class="list-inline-item">
                         <a href="/student/professional-info">
                             <div class="d-flex">
@@ -152,9 +152,9 @@
                                 </div>
                                 <div class="pf-2 next-icon"> >></div>
                             </div>
-                            <p>পেশাগত তথ্যাবলী</p>
+                            <p style="font-size:12px;">পেশাগত তথ্য</p>
                         </a>
-                    </li> -->
+                    </li>
                     <li class="list-inline-item">
                         <a href="/student/guest-info">
                             <div class="d-flex">
@@ -181,7 +181,7 @@
                             <p style="font-size:12px;">উপহার সংক্রান্ত তথ্য</p>
                         </a>
                     </li>
-                    <li class="list-inline-item">
+                    <!-- <li class="list-inline-item">
                         <a href="/student/fee-info">
                             <div class="d-flex">
                                 <div class="p-t2">
@@ -193,7 +193,7 @@
                             </div>
                             <p style="font-size:12px;">রেজিস্ট্রেশন ফি</p>
                         </a>
-                    </li>
+                    </li> -->
                     <!-- <li class="list-inline-item">
                         <a href="#">
                             <div class="d-flex">
@@ -226,12 +226,12 @@
                 <div class="col-md-8 mx-auto">
                     <div class="card">
 
-                        <div class="card-body">
+                        <div  class="card-body">
                             <form class="" method="post" action="/student/guest-info">
 
                                 @csrf
-                                <input name="student_id" value="{{$student_id}}" type="hidden"/>
-                                <label class="checkbox-inline">
+                                <input  name="student_id" value="{{$student_id}}" type="hidden"/>
+                                <label  class="checkbox-inline">
                                     <label>কোন পারিবারিক সদস্য </label>
                                     <input type="radio" @if($student->is_guest == false) checked @endif required  name="family_member" value="নাই">নাই
                                     <input type="radio" @if($student->is_guest == true) checked @endif required   name="family_member" value="আছে">আছে

@@ -265,7 +265,7 @@
 
                                     <div class="input-group pt-2 row">
 
-                                        <div class="col-md-12 checkbox-form">
+                                        <div style="border: 1px solid red;" class="col-md-12 checkbox-form">
                                             <label>লিঙ্গ </label>
                                             <label class="checkbox-inline">
                                                 <input type="radio" name="gender" value="পুরুষ">পুরুষ
@@ -344,7 +344,7 @@
                                     </div> -->
                                     <div class="input-group pt-2 row">
 
-                                        <div class="col-md-12 checkbox-form">
+                                        <div style="border: 1px solid red;"  class="col-md-12 checkbox-form">
                                             <label>T-shirt </label>
                                             <label class="checkbox-inline">
 

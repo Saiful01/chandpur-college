@@ -129,7 +129,7 @@
                             </div>
                             <p class="">ব্যক্তিগত তথ্যাবলী</p>
                         </a>
-                    </li>
+                    </li> -->
 
                     <li class="list-inline-item">
                         <a href="/student/academic-info">
@@ -141,9 +141,9 @@
                                 </div>
                                 <div class="pf-2 next-icon"> >></div>
                             </div>
-                            <p class="">একাডেমিক তথ্যাবলী</p>
+                            <p style="font-size:12px;" class="">একাডেমিক তথ্য</p>
                         </a>
-                    </li> -->
+                    </li>
                     <li class="list-inline-item">
                         <a href="/student/professional-info">
                             <div class="d-flex">
@@ -172,7 +172,7 @@
                             </p>
                         </a>
                     </li>
-                    <li class="list-inline-item">
+                    <!-- <li class="list-inline-item">
                         <a href="/student/gift-info">
                             <div class="d-flex">
                                 <div class="p-t2">
@@ -184,7 +184,7 @@
                             </div>
                             <p style="font-size:12px;">উপহার সংক্রান্ত তথ্য</p>
                         </a>
-                    </li>
+                    </li> -->
                     <!-- <li class="list-inline-item">
                         <a href="/student/fee-info">
                             <div class="d-flex">

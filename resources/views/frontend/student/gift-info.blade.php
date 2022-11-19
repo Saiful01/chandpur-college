@@ -157,7 +157,7 @@
                             </div>
                             <p>পেশাগত তথ্যাবলী</p>
                         </a>
-                    </li>
+                    </li> -->
                     <li class="list-inline-item">
                         <a href="/student/guest-info">
                             <div class="d-flex">
@@ -168,11 +168,11 @@
                                 </div>
                                 <div class="pf-2 next-icon"> >></div>
                             </div>
-                            <p> পারিবারিক সদস্যের তথ্যাবলী
+                            <p style="font-size:12px;"> পারিবারিক সদস্যের তথ্য
 
                             </p>
                         </a>
-                    </li> -->
+                    </li>
                     <li class="list-inline-item">
                         <a href="/student/gift-info">
                             <div class="d-flex">
@@ -199,7 +199,7 @@
                             <p style="font-size:12px;">রেজিস্ট্রেশন ফি</p>
                         </a>
                     </li>
-                    <li class="list-inline-item">
+                    <!-- <li class="list-inline-item">
                         <a href="#">
                             <div class="d-flex">
                                 <div class="p-t2">
@@ -211,7 +211,7 @@
                             </div>
                             <p style="font-size:12px;">আমন্ত্রণপত্র </p>
                         </a>
-                    </li>
+                    </li> -->
 
                 </ul>
 
@@ -254,7 +254,7 @@
 
                                     <div class="input-group  pt-2">
                                         <label></label>
-                                        <div class="col-md-12 checkbox-form">
+                                        <div style="border: 1px solid red;" class="col-md-12 checkbox-form">
 
                                             <label class="checkbox-inline">
                                                 <label>ডেলিভারির মাধ্যম </label>
@@ -309,7 +309,7 @@
 
                                     <div class="input-group  pt-2">
                                         <label></label>
-                                        <div class="col-md-12 checkbox-form">
+                                        <div  class="col-md-12 checkbox-form">
 
                                             <label class="checkbox-inline">
                                                 <label>ডেলিভারির মাধ্যম </label>
