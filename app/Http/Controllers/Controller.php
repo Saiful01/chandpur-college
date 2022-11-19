@@ -32,6 +32,7 @@ class Controller extends BaseController
 
     public function home()
     {
+
         Session::forget('student_id');
         return view("frontend.home.index");
 
@@ -70,6 +71,11 @@ class Controller extends BaseController
     public function personalInfo(Request $request)
     {
         if ($request->isMethod("POST")) {
+            $exist = Student::where('phone', $request['phone'])->where('is_payment', true)->first();
+            if ($exist != null) {
+                Alert::error("Sorry", "আপনি এই মোবাইল  নম্বর দিয়ে রেজিস্ট্রেশন করে ফেলেছেন, অন্য মোবাইল  নম্বর দিয়ে চেষ্টা করুন");
+                return back();
+            }
             $image_file = null;
             if ($request->hasFile('image')) {
                 $image = $request->file('image');
@@ -90,7 +96,7 @@ class Controller extends BaseController
                 Alert::success("Success", "Successfully Created");
                 return Redirect::to("/student/academic-info");
             } catch (\Exception $exception) {
-                Alert::error("Success", $exception->getMessage());
+                Alert::error("Sorry", $exception->getMessage());
                 return back();
             }
         }
@@ -118,7 +124,7 @@ class Controller extends BaseController
                 Alert::success("Success", "Successfully Updated");
                 return Redirect::to("/student/academic-info");
             } catch (\Exception $exception) {
-                Alert::error("Success", $exception->getMessage());
+                Alert::error("Sorry", $exception->getMessage());
                 return back();
             }
         }
@@ -148,7 +154,7 @@ class Controller extends BaseController
                 Alert::success("Success", "Successfully Created");
                 return Redirect::to("/current-student/fee-info");
             } catch (\Exception $exception) {
-                Alert::error("Success", $exception->getMessage());
+                Alert::error("Sorry", $exception->getMessage());
                 return back();
             }
         }
@@ -189,7 +195,7 @@ class Controller extends BaseController
 
             } catch (\Exception $exception) {
                 //return $exception->getMessage();
-                Alert::error("Success", $exception->getMessage());
+                Alert::error("Sorry", $exception->getMessage());
                 return back();
             }
         }
@@ -234,7 +240,7 @@ class Controller extends BaseController
 
             } catch (\Exception $exception) {
                 //return $exception->getMessage();
-                Alert::error("Success", $exception->getMessage());
+                Alert::error("Sorry", $exception->getMessage());
                 return back();
             }
         }
@@ -257,7 +263,7 @@ class Controller extends BaseController
                 Alert::success("Success", "Successfully Created");
                 return Redirect::to("/student/guest-info");
             } catch (\Exception $exception) {
-                Alert::error("Success", $exception->getMessage());
+                Alert::error("Sorry", $exception->getMessage());
                 return back();
             }
         }
@@ -280,7 +286,7 @@ class Controller extends BaseController
                 Alert::success("Success", "Successfully Updated");
                 return Redirect::to("/student/guest-info");
             } catch (\Exception $exception) {
-                Alert::error("Success", $exception->getMessage());
+                Alert::error("Sorry", $exception->getMessage());
                 return back();
             }
         }
@@ -301,6 +307,12 @@ class Controller extends BaseController
 
 
             //  return $request->all();
+            $guest_count = GuestInfo::where('student_id', Session::get("student_id"))->count();
+            if ($guest_count > 7) {
+                Alert::error("Sorry", "৭ জনের বেশি গেস্ট যুক্ত করতে পারবেন না  ");
+                return back();
+
+            }
 
             try {
                 if (implode(null, $request['guest_name']) == null) {
@@ -312,6 +324,12 @@ class Controller extends BaseController
                 GuestInfo::where('student_id', $request['student_id'])->delete();
                 $i = 0;
                 foreach ($request['guest_name'] as $item) {
+                    $guest_count = GuestInfo::where('student_id', Session::get("student_id"))->count();
+                    if ($guest_count > 7) {
+                        Alert::error("Sorry", "৭ জনের বেশি গেস্ট যুক্ত করতে পারবেন না  ");
+                        return back();
+
+                    }
 
                     $array = [
                         'student_id' => $request['student_id'],
@@ -331,7 +349,7 @@ class Controller extends BaseController
                 Alert::success("Success", "Successfully Created");
                 return Redirect::to("/student/gift-info");
             } catch (\Exception $exception) {
-                Alert::error("Success", $exception->getMessage());
+                Alert::error("Sorry", $exception->getMessage());
                 return back();
             }
         }
@@ -358,7 +376,7 @@ class Controller extends BaseController
                 Alert::success("Success", "Successfully Created");
                 return Redirect::to("/student/fee-info");
             } catch (\Exception $exception) {
-                Alert::error("Success", $exception->getMessage());
+                Alert::error("Sorry", $exception->getMessage());
                 return back();
             }
         }
@@ -381,7 +399,7 @@ class Controller extends BaseController
                 Alert::success("Success", "Successfully Created");
                 return Redirect::to("/student/fee-info");
             } catch (\Exception $exception) {
-                Alert::error("Success", $exception->getMessage());
+                Alert::error("Sorry", $exception->getMessage());
                 return back();
             }
         }
@@ -404,7 +422,7 @@ class Controller extends BaseController
                 Alert::success("Success", "Successfully Created");
                 return Redirect::to("/student/invitation-info");
             } catch (\Exception $exception) {
-                Alert::error("Success", $exception->getMessage());
+                Alert::error("Sorry", $exception->getMessage());
                 return back();
             }
 
@@ -444,7 +462,7 @@ class Controller extends BaseController
                 Alert::success("Success", "Successfully Created");
                 return Redirect::to("/student/invitation-info");
             } catch (\Exception $exception) {
-                Alert::error("Success", $exception->getMessage());
+                Alert::error("Sorry", $exception->getMessage());
                 return back();
             }
 
@@ -459,7 +477,7 @@ class Controller extends BaseController
     {
 
 
-        //return $request->all();
+        // return $request->all();
 
         if ($request['value_c'] == "guest") {
 
@@ -469,23 +487,23 @@ class Controller extends BaseController
                         'is_verified' => true
                     ]);
                 } catch (\Exception $exception) {
-                    //Alert::error("Success", $exception->getMessage());
+                    //Alert::error("Sorry", $exception->getMessage());
                     return back();
                 }
             }
-
             $array = [
-                'tran_id' => $request['tran_id'],
-                'student_id' => $request['value_a'],
+                'status' => "Guest Payment Done",
                 'ssl_data' => json_encode($request->all()),
-                'amount' => $request['amount'],
                 'type' => "Ticket",
             ];
+
             try {
-                Payment::create($array);
+                Payment::where('tran_id', $request['tran_id'])->update($array);
             } catch (\Exception $exception) {
+
                 return $exception->getMessage();
             }
+
 
             Session::put("data", $request['value_b']);
             return Redirect::to("/guest/ticket-download");
@@ -507,14 +525,12 @@ class Controller extends BaseController
         $student_id = $request->input('value_a');
 
         $array = [
-            'student_id' => $student_id,
-            'tran_id' => $tran_id,
-            'amount' => $amount,
+            'status' => "Payment Done",
             'ssl_data' => json_encode($request->all()),
         ];
 
         try {
-            Payment::create($array);
+            Payment::where('tran_id', $tran_id)->update($array);
         } catch (\Exception $exception) {
 
             return $exception->getMessage();
@@ -677,15 +693,20 @@ class Controller extends BaseController
     public function payment(Request $request, $amount)
 
     {
+        if (Session::get("student_id") == null) {
+            return \redirect('/');
+        }
 
+        $student = Student::where('id', Session::get("student_id"))->first();
+        $tran_id = uniqid();
 
         $post_data = array();
         $post_data['total_amount'] = $amount; # You cant not pay less than 10
         $post_data['currency'] = "BDT";
-        $post_data['tran_id'] = uniqid(); // tran_id must be unique
+        $post_data['tran_id'] = $tran_id; // tran_id must be unique
 
         # CUSTOMER INFORMATION
-        $post_data['cus_name'] = 'Customer Name';
+        $post_data['cus_name'] = $student->name;
         $post_data['cus_email'] = 'customer@mail.com';
         $post_data['cus_add1'] = 'Customer Address';
         $post_data['cus_add2'] = "";
@@ -693,7 +714,7 @@ class Controller extends BaseController
         $post_data['cus_state'] = "";
         $post_data['cus_postcode'] = "";
         $post_data['cus_country'] = "Bangladesh";
-        $post_data['cus_phone'] = '8801XXXXXXXXX';
+        $post_data['cus_phone'] = $student->phone;
         $post_data['cus_fax'] = "";
 
         # SHIPMENT INFORMATION
@@ -713,8 +734,8 @@ class Controller extends BaseController
 
         # OPTIONAL PARAMETERS
         $post_data['value_a'] = Session::get("student_id");
-        $post_data['value_b'] = "ref002";
-        $post_data['value_c'] = "ref003";
+        $post_data['value_b'] = $student->name;
+        $post_data['value_c'] = $student->phone;
         $post_data['value_d'] = "ref004";
 
         #Before  going to initiate the payment order status need to insert or update as Pending.
@@ -730,6 +751,20 @@ class Controller extends BaseController
                  'transaction_id' => $post_data['tran_id'],
                  'currency' => $post_data['currency']
              ]);*/
+        $array = [
+            'student_id' => $student->id,
+            'tran_id' => $tran_id,
+            'amount' => $amount,
+            'status' => "payment initiate",
+
+        ];
+
+        try {
+            Payment::create($array);
+        } catch (\Exception $exception) {
+
+            return $exception->getMessage();
+        }
 
         $sslc = new SslCommerzNotification();
         # initiate(Transaction Data , false: Redirect to SSLCOMMERZ gateway/ true: Show all the Payement gateway here )
@@ -924,7 +959,7 @@ class Controller extends BaseController
         $otp = rand(1000, 9999);
         $sms = "Your verification code is " . $otp;
 
-        $is_exist = Student::where('phone', $phone)->first();
+        $is_exist = Student::where('phone', $phone)->where('is_payment', true)->first();
         if (is_null($is_exist)) {
             return 201;
         } else {
@@ -972,6 +1007,12 @@ class Controller extends BaseController
         $total = 0;
         $arr = [];
         foreach ($request['guest_name'] as $item) {
+            $guest_count = GuestInfo::where('student_id', Session::get("student_id"))->count();
+            if ($guest_count > 7) {
+                Alert::error("Sorry", "আপনি ৭ জন গেস্ট যুক্ত করে ফেলেছেন,৭ জনের বেশি গেস্ট যুক্ত করতে পারবেন না  ");
+                return back();
+
+            }
 
             $array = [
                 'student_id' => Session::get("student_id"),
@@ -988,14 +1029,15 @@ class Controller extends BaseController
             $i++;
             $total = $total + getGuestFee();
         }
-
+        $student = Student::where('id', Session::get("student_id"))->first();
+        $tran_id = uniqid();
         $post_data = array();
         $post_data['total_amount'] = $total; # You cant not pay less than 10
         $post_data['currency'] = "BDT";
-        $post_data['tran_id'] = uniqid(); // tran_id must be unique
+        $post_data['tran_id'] = $tran_id; // tran_id must be unique
 
         # CUSTOMER INFORMATION
-        $post_data['cus_name'] = 'Customer Name';
+        $post_data['cus_name'] = $student->name;
         $post_data['cus_email'] = 'customer@mail.com';
         $post_data['cus_add1'] = 'Customer Address';
         $post_data['cus_add2'] = "";
@@ -1003,7 +1045,7 @@ class Controller extends BaseController
         $post_data['cus_state'] = "";
         $post_data['cus_postcode'] = "";
         $post_data['cus_country'] = "Bangladesh";
-        $post_data['cus_phone'] = '8801XXXXXXXXX';
+        $post_data['cus_phone'] = $student->phone;
         $post_data['cus_fax'] = "";
 
         # SHIPMENT INFORMATION
@@ -1026,6 +1068,20 @@ class Controller extends BaseController
         $post_data['value_b'] = json_encode($arr);
         $post_data['value_c'] = "guest";
         $post_data['value_d'] = "ref004";
+        $array = [
+            'student_id' => $student->id,
+            'tran_id' => $tran_id,
+            'amount' => $total,
+            'status' => " guest payment initiate",
+
+        ];
+
+        try {
+            Payment::create($array);
+        } catch (\Exception $exception) {
+
+            return $exception->getMessage();
+        }
 
 
         $sslc = new SslCommerzNotification();
