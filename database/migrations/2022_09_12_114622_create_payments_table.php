@@ -15,10 +15,6 @@ return new class extends Migration
     {
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger("student_id");
-            $table->string("tran_id");
-            $table->string("amount");
-            $table->string("ssl_data");
             $table->timestamps();
         });
     }

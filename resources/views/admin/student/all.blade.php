@@ -109,7 +109,17 @@
                     @foreach($result as $item)
                         <tr>
                             <td class="text-center">{{$i++}}</td>
-                            <td class="font-w600">{{$item->registration_id}}</td>
+                            <td class="font-w600">
+                            <td class="font-w600">
+                                {{$item->registration_id}}
+                                    @if(count($item->payments)> 0)
+                                        @foreach($item->payments as $payment)
+                                        <p class="mb-0">Tran ID: {{$payment->tran_id}}</p>
+                                        <p class="mb-0">Tk: {{$payment->amount}}</p>
+                                    @endforeach
+                                @endif<br>
+                            </td>
+                            </td>
                             <td class="font-w600">{{$item->name}}</td>
                             <td class="font-w600">{{$item->phone}}</td>
                             <td class="font-w600">{{$item->email}}</td>
@@ -483,7 +493,8 @@
                                 @if($item->is_payment==1)
                                     <span class="badge bg-primary">Yes  </span>
                                 @else
-                                    <span class="badge bg-danger">No  </span>
+                                    <span class="badge bg-danger d-block">No  </span>
+                                    <a href='{{ URL::to("/check-payment/{$item->id}") }}' target="_blank" class="btn btn-info btn-sm mt-2 d-block">Check</a>
                                 @endif
 
                             </td>

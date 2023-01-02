@@ -122,13 +122,13 @@ function getErrorMessage($debug_message, $production_message)
 
 function getPlatformName()
 {
-    return "Living Brands";
+    return "Qubit";
 }
 
 
 function getCopyright()
 {
-    return "Living Brands";
+    return "Qubit Solution Lab";
 }
 
 function getDeliveryfee()
@@ -155,7 +155,7 @@ function getPresentAddress()
 
 function getCopyrightUrl()
 {
-    return "Living Brands";
+    return "Qubit Solution Lab";
 }
 
 function getOldStudentFee()

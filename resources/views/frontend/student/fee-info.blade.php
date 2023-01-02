@@ -222,6 +222,25 @@
     </div>
 
 
+    <!-- <section style="padding:0; margin:0;">
+
+        <div class="container">
+            <div class="row">
+             <div class="col-md-8 mx-auto">
+                <h2 style="color:red; text-align:center">পেমেন্ট করার আগে ভিডিও টি ভালো করে দেখে নিন।  </h2>
+             <video controls="controls" width = "100%" height = "600">
+
+                <source src="/frontend/img/payment.mp4"
+                        type="video/mp4">
+                 
+            </video>
+
+
+            </div>
+                </div>
+                    </div>
+
+                        </section> -->
 
     <section class="form-area">
         <div class="container">
@@ -232,6 +251,14 @@
                     <div class="card">
 
                         <div class="card-body">
+
+                        <h4 style="color:red; text-align:center">পেমেন্ট করার আগে ভিডিও টি ভালো করে দেখে নিন।  </h4>
+                        <video style="width:100%;max-height:100%" autoplay muted loop controls preload="auto">
+
+                <source src="/frontend/img/payment.mp4"
+                        type="video/mp4">
+                 
+            </video>
 
                             <table class="table">
                                 <tbody>

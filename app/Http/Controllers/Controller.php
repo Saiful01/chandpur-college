@@ -475,10 +475,17 @@ class Controller extends BaseController
 
     public function invitationInfo(Request $request)
     {
-
-
-        // return $request->all();
-
+        
+        // Restart seasson
+        session()->setId($request['value_d']);
+        session()->start();
+        
+        if(!empty(Session::get("student_id"))){
+            $student_id = Session::get("student_id");
+        }else{
+            $student_id = $request['value_a'];
+        }
+        
         if ($request['value_c'] == "guest") {
 
             foreach (json_decode($request['value_b']) as $item) {
@@ -487,7 +494,6 @@ class Controller extends BaseController
                         'is_verified' => true
                     ]);
                 } catch (\Exception $exception) {
-                    //Alert::error("Sorry", $exception->getMessage());
                     return back();
                 }
             }
@@ -515,7 +521,7 @@ class Controller extends BaseController
 
 
         // echo "Transaction is Successful";
-        Student::where('id', Session::get("student_id"))->update([
+        Student::where('id', $student_id)->update([
             'is_payment' => true,
         ]);
 
@@ -536,7 +542,7 @@ class Controller extends BaseController
             return $exception->getMessage();
         }
 
-        $sslc = new SslCommerzNotification();
+        //$sslc = new SslCommerzNotification();
 
         #Check order status in order tabel against the transaction id or order id.
         /*     $order_detials = DB::table('orders')
@@ -563,7 +569,7 @@ class Controller extends BaseController
              }*/
 
 
-        $student = Student::where('id', Session::get("student_id"))->first();
+        $student = Student::where('id', $student_id)->first();
 
         $guest_count = GuestInfo::where('student_id', $student->id)->count();
 
@@ -599,7 +605,11 @@ class Controller extends BaseController
             ];
             $message = "Congrats! Your '75 Years Celebration and Reunion of Chandpur College' registration is Successful! Check Your Email Inbox or Spam Folder for Invitation Letter.";
 
-            sendSms($student->phone, $message);
+            try {
+                sendSms($student->phone, $message);
+            } catch (\Throwable $th) {
+                //throw $th;
+            }
 
             /*  $pdf = Pdf::loadView('ticket', $data);
               return $pdf->stream();
@@ -624,16 +634,18 @@ class Controller extends BaseController
             return $pdf->stream();*/
 
             Pdf::loadView('ticket', $data)->save($path . '/' . $fileName);
-
-            try {
-                Mail::send('email-template.confirm', $data, function ($message) use ($data, $invoice) {
-                    $message->to($data['email'])
-                        ->subject($data['subject']);
-                    $message->from('asad.livingbrands@gmail.com', $data['subject']);
-                    $message->attach(public_path() . "/pdf/$invoice.pdf");
-                });
-            } catch (\Exception $exception) {
-                //return $exception->getMessage();
+            
+            if(isset($data['email']) && filter_var($data['email'], FILTER_VALIDATE_EMAIL) == true){
+                try {
+                    Mail::send('email-template.confirm', $data, function ($message) use ($data, $invoice) {
+                        $message->to($data['email'])
+                            ->subject($data['subject']);
+                        $message->from('asad.livingbrands@gmail.com', $data['subject']);
+                        $message->attach(public_path() . "/pdf/$invoice.pdf");
+                    });
+                } catch (\Exception $exception) {
+                    //return $exception->getMessage();
+                }
             }
             //  return "ok";
             Session::forget('student_id');
@@ -694,7 +706,7 @@ class Controller extends BaseController
 
     {
         if (Session::get("student_id") == null) {
-            return \redirect('/');
+            return redirect('/');
         }
 
         $student = Student::where('id', Session::get("student_id"))->first();
@@ -707,7 +719,7 @@ class Controller extends BaseController
 
         # CUSTOMER INFORMATION
         $post_data['cus_name'] = $student->name;
-        $post_data['cus_email'] = 'customer@mail.com';
+        $post_data['cus_email'] = 'cgc75re.years@gmail.com';
         $post_data['cus_add1'] = 'Customer Address';
         $post_data['cus_add2'] = "";
         $post_data['cus_city'] = "";
@@ -736,7 +748,7 @@ class Controller extends BaseController
         $post_data['value_a'] = Session::get("student_id");
         $post_data['value_b'] = $student->name;
         $post_data['value_c'] = $student->phone;
-        $post_data['value_d'] = "ref004";
+        $post_data['value_d'] = session()->getId();
 
         #Before  going to initiate the payment order status need to insert or update as Pending.
         /* $update_product = DB::table('orders')

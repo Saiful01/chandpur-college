@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use DB;
 use Illuminate\Http\Request;
 use App\Library\SslCommerz\SslCommerzNotification;
+use Illuminate\Support\Facades\Redirect;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class SslCommerzPaymentController extends Controller
 {
@@ -213,43 +215,48 @@ class SslCommerzPaymentController extends Controller
 
     public function fail(Request $request)
     {
-        $tran_id = $request->input('tran_id');
+        Alert::error("Sorry", "Your payment has benn failed");
+        return Redirect::to("/");
+        // $tran_id = $request->input('tran_id');
 
-        $order_detials = DB::table('orders')
-            ->where('transaction_id', $tran_id)
-            ->select('transaction_id', 'status', 'currency', 'amount')->first();
+        // $order_detials = DB::table('orders')
+        //     ->where('transaction_id', $tran_id)
+        //     ->select('transaction_id', 'status', 'currency', 'amount')->first();
 
-        if ($order_detials->status == 'Pending') {
-            $update_product = DB::table('orders')
-                ->where('transaction_id', $tran_id)
-                ->update(['status' => 'Failed']);
-            echo "Transaction is Falied";
-        } else if ($order_detials->status == 'Processing' || $order_detials->status == 'Complete') {
-            echo "Transaction is already Successful";
-        } else {
-            echo "Transaction is Invalid";
-        }
+        // if ($order_detials->status == 'Pending') {
+        //     $update_product = DB::table('orders')
+        //         ->where('transaction_id', $tran_id)
+        //         ->update(['status' => 'Failed']);
+        //     echo "Transaction is Falied";
+        // } else if ($order_detials->status == 'Processing' || $order_detials->status == 'Complete') {
+        //     echo "Transaction is already Successful";
+        // } else {
+        //     echo "Transaction is Invalid";
+        // }
 
     }
 
     public function cancel(Request $request)
     {
-        $tran_id = $request->input('tran_id');
 
-        $order_detials = DB::table('orders')
-            ->where('transaction_id', $tran_id)
-            ->select('transaction_id', 'status', 'currency', 'amount')->first();
+        Alert::error("Sorry", "Your payment has benn canceled");
+        return Redirect::to("/");
+        // $tran_id = $request->input('tran_id');
 
-        if ($order_detials->status == 'Pending') {
-            $update_product = DB::table('orders')
-                ->where('transaction_id', $tran_id)
-                ->update(['status' => 'Canceled']);
-            echo "Transaction is Cancel";
-        } else if ($order_detials->status == 'Processing' || $order_detials->status == 'Complete') {
-            echo "Transaction is already Successful";
-        } else {
-            echo "Transaction is Invalid";
-        }
+        // $order_detials = DB::table('orders')
+        //     ->where('transaction_id', $tran_id)
+        //     ->select('transaction_id', 'status', 'currency', 'amount')->first();
+
+        // if ($order_detials->status == 'Pending') {
+        //     $update_product = DB::table('orders')
+        //         ->where('transaction_id', $tran_id)
+        //         ->update(['status' => 'Canceled']);
+        //     echo "Transaction is Cancel";
+        // } else if ($order_detials->status == 'Processing' || $order_detials->status == 'Complete') {
+        //     echo "Transaction is already Successful";
+        // } else {
+        //     echo "Transaction is Invalid";
+        // }
 
 
     }
