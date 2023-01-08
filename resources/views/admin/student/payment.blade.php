@@ -91,7 +91,7 @@
 
                 <!-- DataTables functionality is initialized with .js-dataTable-full class in js/pages/be_tables_datatables.min.js which was auto compiled from _es6/pages/be_tables_datatables.js -->
                 <table
-                    class="table table-bordered table-striped {{--table-vcenter js-dataTable-buttons dataTable no-footer--}}"
+                    class="table table-bordered table-striped table-responsive {{--table-vcenter js-dataTable-buttons dataTable no-footer--}}"
                     {{--id="DataTables_Table_1"--}}>
                     <thead>
                     <tr>
@@ -554,6 +554,9 @@
                                     Extar Guest
                                     <a href="/pdf/guest_{{$item->registration_id}}.pdf" download>Download</a>
                                 @endif
+
+
+                                <a href="/admin-student-edit/{{$item->id}}" class="btn btn-primary" >Edit</a>
 
                             </td>
 

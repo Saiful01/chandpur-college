@@ -8,6 +8,7 @@ use App\Models\Souvenir;
 use App\Models\Student;
 use App\Models\User;
 use App\Models\GuestInfo;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -103,6 +104,37 @@ class AdminController extends Controller
         $result = $query->paginate(50);
         return view('admin.student.payment')->with('result', $result);
     }
+    public function adminStudentEdit($id)
+    {
+        $result = Student::with("academicQualification", "profession",)->where('id', $id)->first();
+
+        return view('admin.student.edit')->with('result', $result);
+    }
+    public function adminStudentUpdate(Request $request)
+    {
+
+        $image_file = $request['profile_pic'];
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $image_name = time() . '.' . $image->getClientOriginalExtension();
+            $destinationPath = public_path('/images/student');
+            $image->move($destinationPath, $image_name);
+            $image_file = '/images/student/' . $image_name;
+        }
+        $request['profile_pic'] = $image_file;
+        $request['created_at'] = Carbon::now();
+        $request['updated_at'] = Carbon::now();
+
+        try {
+            Student::where('id', $request['id'])->update($request->except("_token", "image"));
+
+            Alert::success("Success", "Successfully Updated");
+            return back();
+        } catch (\Exception $exception) {
+            Alert::error("Sorry", $exception->getMessage());
+            return back();
+        }
+    }
 
     public function nonpaymentStudent(Request $request)
     {
@@ -134,24 +166,24 @@ class AdminController extends Controller
         return Payment::orderBy("created_at", "DESC")->get();
     }
 
-    /** 
+    /**
      * My Function
      */
     public function checkPayment($id){
 
         $row = Student::with("payments")->where('id', $id)->first();
         return view('admin.student.checkpayment', ['row' => $row]);
-        
+
     }
-    
+
     public function sslcValidate(Request $request){
 
-        // SSLc info 
+        // SSLc info
         $store_id = env("STORE_ID");
         $store_passwd = env("STORE_PASSWORD");
-        
+
         $APILINK = "https://securepay.sslcommerz.com/validator/api/merchantTransIDvalidationAPI.php";
-        
+
         //$APILINK = "https://sandbox.sslcommerz.com/validator/api/merchantTransIDvalidationAPI.php";
 
         $transid = $request->transid;
@@ -160,11 +192,11 @@ class AdminController extends Controller
         $email = $request->email;
 
         $ch = curl_init();
-        
+
         curl_setopt($ch, CURLOPT_URL, $APILINK."?tran_id={$transid}&store_id={$store_id}&store_passwd={$store_passwd}");
-        
+
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        
+
         // open if you run on local
         // curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
         // curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
@@ -176,16 +208,16 @@ class AdminController extends Controller
         curl_close($ch);
 
         $result_array = json_decode($result);
-       
-        
+
+
 
         $status = $result_array->element[0]->status;
         $response = $result_array->element[0];
-        
+
         if(sizeof($result_array->element) == 2){
             $status = $result_array->element[1]->status;
             $response = $result_array->element[1];
-        }       
+        }
 
         if (($status == 'VALIDATED' || $status == 'VALID') && $student_id == $response->value_a) {
             Student::where('id', $student_id)->update([
@@ -198,8 +230,8 @@ class AdminController extends Controller
             ];
             Payment::where('tran_id', $transid)->update($data);
             $message = "Congrats! Your '75 Years Celebration and Reunion of Chandpur College' registration is Successful! Check Your Email Inbox or Spam Folder for Invitation Letter.";
-            
-            // Sending sms 
+
+            // Sending sms
             if(!empty($phone)){
                 try {
                     sendSms($phone, $message);
@@ -207,7 +239,7 @@ class AdminController extends Controller
             }
             $student = Student::where('id', $student_id)->first();
             $guest_count = GuestInfo::where('student_id', $student->id)->count();
-            
+
             $data = [
                 'invoice' => $student->registration_id,
                 'name' => $student->eng_name,
@@ -233,7 +265,7 @@ class AdminController extends Controller
             ];
 
             $invoice = $student->registration_id;
-            
+
             if (isset($data['email']) && filter_var($data['email'], FILTER_VALIDATE_EMAIL) == true) {
                 try {
                     Mail::send('email-template.confirm', $data, function ($message) use ($data, $invoice) {
@@ -246,11 +278,11 @@ class AdminController extends Controller
             }
 
             Alert::success('Success ', "Registration information updated.");
-            
+
         }else{
             Alert::error('Error ', "Invalid Payment");
         }
         return redirect()->back();
     }
-    
+
 }

@@ -46,6 +46,8 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('/non-payment-students', [AdminController::class, 'nonpaymentStudent']);
     Route::get('/check-payment/{id}', [AdminController::class, 'checkPayment']);
     Route::post('/validate-sslc', [AdminController::class, 'sslcValidate']);
+    Route::get('/admin-student-edit/{id}', [AdminController::class, 'adminStudentEdit']);
+    Route::post('/admin-student-update', [AdminController::class, 'adminStudentUpdate']);
 
 
     Route::get('/payment', [AdminController::class, 'paymentData']);
