@@ -292,10 +292,10 @@
                                     <div class="input-group row pt-2">
 
                                         <div class="col-sm-12">
-                                            <p style="color:red;">শুধুমাত্র ২০১৫ সাল পর্যন্ত এইচএসসি, ২০২০ সাল পর্যন্ত
+                                            <!-- <p style="color:red;">শুধুমাত্র ২০১৫ সাল পর্যন্ত এইচএসসি, ২০২০ সাল পর্যন্ত
                                                 ডিগ্রি/অনার্স এবং ২০২২ সাল পর্যন্ত মাস্টার্স পরীক্ষায় কৃতকার্য প্রাক্তন
                                                 শিক্ষার্থীরা রেজিস্ট্রেশন করতে পারবেন।
-                                                * </p>
+                                                * </p> -->
 
                                             <div id="hsc">
                                                 <select style="border: 1px solid red;" class="form-select"
@@ -303,6 +303,13 @@
 
 
                                                     <option value="">পাশের সাল: *</option>
+                                                    <option value="২০২২">২০২২</option>
+                                                    <option value="২০২১">২০২১</option>
+                                                    <option value="২০২০">২০২০</option>
+                                                    <option value="২০১৯">২০১৯</option>
+                                                    <option value="২০১৮">২০১৮</option>
+                                                    <option value="২০১৭">২০১৭</option>
+                                                    <option value="২০১৬">২০১৬</option>
                                                     <option value="২০১৫">২০১৫</option>
                                                     <option value="২০১৪">২০১৪</option>
                                                     <option value="২০১৩">২০১৩</option>
@@ -364,6 +371,13 @@
 
 
                                                     <option value="">পাশের সাল: *</option>
+                                                    <option value="২০২২">২০২২</option>
+                                                    <option value="২০২১">২০২১</option>
+                                                    <option value="২০২০">২০২০</option>
+                                                    <option value="২০১৯">২০১৯</option>
+                                                    <option value="২০১৮">২০১৮</option>
+                                                    <option value="২০১৭">২০১৭</option>
+                                                    <option value="২০১৬">২০১৬</option>
                                                     <option value="২০২০">২০২০</option>
                                                     <option value="২০১৯">২০১৯</option>
                                                     <option value="২০১৮">২০১৮</option>
@@ -590,10 +604,10 @@
                                     <div class="input-group row pt-2">
 
                                         <div class="col-sm-12">
-                                            <p style="color:red;">শুধুমাত্র ২০১৫ সাল পর্যন্ত এইচএসসি, ২০২০ সাল পর্যন্ত
+                                            <!-- <p style="color:red;">শুধুমাত্র ২০১৫ সাল পর্যন্ত এইচএসসি, ২০২০ সাল পর্যন্ত
                                                 ডিগ্রি/অনার্স এবং ২০২২ সাল পর্যন্ত মাস্টার্স পরীক্ষায় কৃতকার্য প্রাক্তন
                                                 শিক্ষার্থীরা রেজিস্ট্রেশন করতে পারবেন।
-                                                * </p>
+                                                * </p> -->
                                             <select required class="form-select" name="passing_year">
                                                 <div>
                                                     <option @if($academic->passing_year == "২০২২") selected
