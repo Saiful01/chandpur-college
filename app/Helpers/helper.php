@@ -122,13 +122,13 @@ function getErrorMessage($debug_message, $production_message)
 
 function getPlatformName()
 {
-    return "Qubit";
+    return "Chand Pur Govt College";
 }
 
 
 function getCopyright()
 {
-    return "Qubit Solution Lab";
+    return "Habson Communication";
 }
 
 function getDeliveryfee()
