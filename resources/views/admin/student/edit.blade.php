@@ -161,6 +161,7 @@
                                 </label>
                             </div>
                         </div>
+
                         <div class="input-group row mt-2">
                             <label class="" for="image">আপনার পাসপোর্ট সাইজের ছবি প্রদান করুন </label>
                             <input type="file" class="form-control" id="uploadedImage" name="image">
