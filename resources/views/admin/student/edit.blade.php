@@ -167,6 +167,7 @@
                         </div>
                         <div class="mb-2">
                             <img src="{{$result->profile_pic}}" id="imagePreview" class="w-100 img-thumbnail" style="max-height: 275px;"/>
+                            <input type="hidden" name="profile_pic" value="{{$result->profile_pic}}" >
                         </div>
 
                         <div class="mb-2">
