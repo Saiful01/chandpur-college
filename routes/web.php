@@ -50,6 +50,7 @@ Route::group(['middleware' => 'admin'], function () {
     Route::post('/admin-student-update', [AdminController::class, 'adminStudentUpdate']);
 
 
+
     Route::get('/payment', [AdminController::class, 'paymentData']);
 });
 
