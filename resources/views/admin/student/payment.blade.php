@@ -29,6 +29,7 @@
                 All Student <small>Table</small>
 
             </h3>
+            <a href="/export-user" class="btn btn-danger">Export Data</a>
 
         </div>
         <div class="row">

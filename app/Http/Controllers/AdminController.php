@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 
+use App\Exports\UsersExport;
 use App\Models\Payment;
 use App\Models\Souvenir;
 use App\Models\Student;
@@ -13,6 +14,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
+use Maatwebsite\Excel\Facades\Excel;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Mail;
 
@@ -159,6 +161,10 @@ class AdminController extends Controller
     {
         Auth::logout();
         return Redirect::to("/login");
+    }
+    public function export()
+    {
+        return Excel::download(new UsersExport, 'users.xlsx');
     }
 
     public function paymentData()

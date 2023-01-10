@@ -33,6 +33,39 @@ class Controller extends BaseController
     public function home()
     {
 
+        /*$query = Student::leftJoin('academic_qualifications', 'academic_qualifications.student_id', '=', 'students.id')
+            ->leftJoin('professional_experineces', 'professional_experineces.student_id', '=', 'students.id')
+            ->leftJoin('guest_infos', 'guest_infos.student_id', '=', 'students.id')
+            ->leftJoin('gift_deliveries', 'gift_deliveries.student_id', '=', 'students.id')
+            ->leftJoin('payments', 'payments.student_id', '=', 'students.id')
+            ->where('students.is_payment', true )
+            ->select(
+                'students.name',
+                'students.nationality',
+                'students.email',
+                'students.phone',
+                'students.address',
+                'students.zila',
+                'students.father_name',
+                'students.mother_name',
+                'students.nid_no',
+                'students.registration_id',
+                'students.t_shirt_size',
+                'academic_qualifications.program_name',
+                'academic_qualifications.department',
+                'academic_qualifications.session',
+                'academic_qualifications.reg_no',
+                'academic_qualifications.passing_year',
+                'professional_experineces.profession',
+                'professional_experineces.designation',
+                'professional_experineces.institute_name',
+                'professional_experineces.office_phone',
+                'professional_experineces.office_email',
+
+            );
+
+        return $query->get();*/
+
         Session::forget('student_id');
         return view("frontend.home.index");
 
@@ -475,17 +508,17 @@ class Controller extends BaseController
 
     public function invitationInfo(Request $request)
     {
-        
+
         // Restart seasson
         session()->setId($request['value_d']);
         session()->start();
-        
+
         if(!empty(Session::get("student_id"))){
             $student_id = Session::get("student_id");
         }else{
             $student_id = $request['value_a'];
         }
-        
+
         if ($request['value_c'] == "guest") {
 
             foreach (json_decode($request['value_b']) as $item) {
@@ -634,7 +667,7 @@ class Controller extends BaseController
             return $pdf->stream();*/
 
             Pdf::loadView('ticket', $data)->save($path . '/' . $fileName);
-            
+
             if(isset($data['email']) && filter_var($data['email'], FILTER_VALIDATE_EMAIL) == true){
                 try {
                     Mail::send('email-template.confirm', $data, function ($message) use ($data, $invoice) {
