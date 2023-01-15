@@ -52,6 +52,7 @@ Route::group(['middleware' => 'admin'], function () {
 
 
     Route::get('/payment', [AdminController::class, 'paymentData']);
+    Route::get('/export-all-data', [AdminController::class, 'exportData']);
     Route::get('/export-user', [AdminController::class, 'export']);
 });
 

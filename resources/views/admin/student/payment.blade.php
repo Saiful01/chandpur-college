@@ -29,7 +29,8 @@
                 All Student <small>Table</small>
 
             </h3>
-            <a href="/export-user" class="btn btn-danger">Export Data</a>
+            <a href="/export-user" class="btn btn-danger">Export Students</a>
+            <a href="/export-all-data" class="btn btn-info">Export Guest Data</a>
 
         </div>
         <div class="row">
@@ -38,7 +39,7 @@
 
                     <div class="card-body">
 
-                        <form action="/all-students" method="get">
+                        <form action="/payment-students" method="get">
                             <div class="row">
 
                                 <div class="col-md-3">

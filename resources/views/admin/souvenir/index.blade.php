@@ -1,5 +1,6 @@
 @extends("layouts.admin")
 @section('title', 'Admin Panel')
+
 @section("content")
 
     @push('header-scripts')
@@ -159,7 +160,7 @@
             <script src="/admin-assets/js/plugins/datatables-buttons/buttons.html5.min.js"></script>
             <script src="/admin-assets/js/pages/be_tables_datatables.min.js"></script>
             <!--End JS for This Page-->
-            
+
         @endonce
     @endpush
 

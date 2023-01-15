@@ -106,6 +106,7 @@ class AdminController extends Controller
         $result = $query->paginate(50);
         return view('admin.student.payment')->with('result', $result);
     }
+
     public function adminStudentEdit($id)
     {
         $result = Student::with("academicQualification", "profession",)->where('id', $id)->first();
@@ -165,6 +166,13 @@ class AdminController extends Controller
     public function export()
     {
         return Excel::download(new UsersExport, 'users.xlsx');
+    }
+    public function exportData(Request $request)
+    {
+        $query = GuestInfo::join('students', 'students.id', '=', 'guest_infos.student_id')->where('students.is_payment', true);
+
+        $result = $query->select('guest_infos.*','students.registration_id','students.name','students.phone')->get();
+        return view('admin.student.export')->with('result', $result);
     }
 
     public function paymentData()
