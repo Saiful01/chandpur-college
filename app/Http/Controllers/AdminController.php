@@ -9,11 +9,14 @@ use App\Models\Souvenir;
 use App\Models\Student;
 use App\Models\User;
 use App\Models\GuestInfo;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Response;
 use Maatwebsite\Excel\Facades\Excel;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Mail;
@@ -178,6 +181,56 @@ class AdminController extends Controller
     public function paymentData()
     {
         return Payment::orderBy("created_at", "DESC")->get();
+    }
+    public function NewTicketDownload($id)
+    {
+        $student = Student::where('id', $id)->first();
+        $guest_count = GuestInfo::where('student_id', $student->id)->count();
+        $invoice = $student->registration_id;
+        $data = [
+            'invoice' => $student->registration_id,
+            'name' => $student->eng_name,
+            'nationality' => $student->nationality,
+            'gender' => $student->gender,
+            'email' => $student->email,
+            'phone' => $student->phone,
+            'address' => $student->address,
+            'birth_date' => $student->birth_date,
+            'blood_group' => $student->blood_group,
+            'father_name' => $student->father_name,
+            'nid_no' => $student->nid_no,
+            'registration_id' => $student->registration_id,
+            't_shirt_size' => $student->t_shirt_size,
+            'education_year' => $student->education_year,
+            'profile_pic' => $student->profile_pic,
+            'guest_count' => $guest_count,
+            'logo' => "/frontend/img/header-logo.png",
+            'sign1' => "/frontend/img/asit-signature.png",
+            'sign2' => "/frontend/img/jillur-rahman.png",
+            'sign3' => "/frontend/img/ratan-signature.png",
+            'subject' => "ঐতিহ্যের উৎকর্ষে উল্লাসের ৭৫ বছর ",
+        ];
+
+        $path = public_path('/pdf/');
+        $fileName = $invoice . '.pdf';
+        if (!File::exists($path)) {
+            File::makeDirectory($path);
+        }
+
+      /*  $pdf = Pdf::loadView('ticket', $data);
+        return $pdf->stream();*/
+       /* if (file_exists( public_path() . $fileName)) {
+            File::delete($path . '/' . $fileName);
+        }*/
+
+        Pdf::loadView('ticket', $data)->save($path . '/' . $fileName);
+
+        return Response::download($path . '/' . $fileName);
+
+
+
+
+
     }
 
     /**

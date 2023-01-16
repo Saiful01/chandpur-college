@@ -130,7 +130,8 @@
                                 @endif<br>
                                 Guest: {{count($item->guests)}}
                             </td>
-                            <td class="font-w600">{{$item->name}}</td>
+                            <td class="font-w600">{{$item->name}} <br> <a href="{{$item->profile_pic}}" download="">Image
+                                    Download</a></td>
                             <td class="font-w600">{{$item->phone}}</td>
                             <td class="font-w600">{{$item->email}}</td>
                             <td class="font-w600"><!-- Button trigger modal -->
@@ -553,12 +554,14 @@
 
                                 <a href="/pdf/{{$item->registration_id}}.pdf" download>Download</a>
                                 @if(file_exists( public_path().'/pdf/guest_'.$item->registration_id.'.pdf' ))
-                                    Extar Guest
+                                    Extra Guest
                                     <a href="/pdf/guest_{{$item->registration_id}}.pdf" download>Download</a>
                                 @endif
 
 
-                                <a href="/admin-student-edit/{{$item->id}}" class="btn btn-primary" >Edit</a>
+                                <a href="/admin-student-edit/{{$item->id}}" class="btn btn-primary">Edit</a>
+                                <a href="/admin-student-new-ticket/{{$item->id}}" class="btn btn-danger mt-1" onclick="return confirm('Are you sure you want to generate new Ticket?');">New Ticket
+                                    Download</a>
 
                             </td>
 
@@ -606,6 +609,7 @@
     @endpush
 
     <!--
+
 
 
 
