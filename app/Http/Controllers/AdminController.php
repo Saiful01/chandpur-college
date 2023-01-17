@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 
 use App\Exports\UsersExport;
+use App\Models\AcademicQualification;
 use App\Models\Payment;
+use App\Models\ProfessionalExperinece;
 use App\Models\Souvenir;
 use App\Models\Student;
 use App\Models\User;
@@ -141,6 +143,51 @@ class AdminController extends Controller
             return back();
         }
     }
+    public function adminStudentAcademicUpdate(Request $request)
+    {
+
+        try {
+            $image_file = $request['mark_sheet'];
+            if ($request->hasFile('image')) {
+                $image = $request->file('image');
+                $image_name = time() . '.' . $image->getClientOriginalExtension();
+                $destinationPath = public_path('/images/marksheet');
+                $image->move($destinationPath, $image_name);
+                $image_file = '/images/marksheet/' . $image_name;
+            }
+
+            $array = [
+                'program_name' => $request['program_name'],
+                'department' => $request['department'],
+                'passing_year' => $request['passing_year'],
+                'roll_no' => $request['roll_no'],
+                'session' => $request['session'],
+                'reg_no' => $request['reg_no'],
+                'mark_sheet' => $image_file,
+
+            ];
+            AcademicQualification::where('id', $request['id'])->update($array);
+            Alert::success("Success", "Successfully Updated");
+            return back();
+
+        } catch (\Exception $exception) {
+            //return $exception->getMessage();
+            Alert::error("Sorry", $exception->getMessage());
+            return back();
+        }
+    }
+    public function adminStudentProfessionUpdate(Request $request)
+    {
+
+        try {
+            ProfessionalExperinece::where('id', $request['id'])->update($request->except("_token", "image"));
+            Alert::success("Success", "Successfully Updated");
+            return back();
+        } catch (\Exception $exception) {
+            Alert::error("Sorry", $exception->getMessage());
+            return back();
+        }
+    }
 
     public function nonpaymentStudent(Request $request)
     {
@@ -150,6 +197,7 @@ class AdminController extends Controller
         }
         if ($request['phone'] != null) {
             $query->where('phone', $request['phone']);
+
         }
         if ($request['date'] != null) {
             $query->whereDate('created_at', $request['date']);

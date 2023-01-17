@@ -48,6 +48,8 @@ Route::group(['middleware' => 'admin'], function () {
     Route::post('/validate-sslc', [AdminController::class, 'sslcValidate']);
     Route::get('/admin-student-edit/{id}', [AdminController::class, 'adminStudentEdit']);
     Route::post('/admin-student-update', [AdminController::class, 'adminStudentUpdate']);
+    Route::post('/admin-student-academic-info-update', [AdminController::class, 'adminStudentAcademicUpdate']);
+    Route::post('/admin-student-professional-info-update', [AdminController::class, 'adminStudentProfessionUpdate']);
 
 
 
