@@ -17,12 +17,13 @@ class UsersExport implements FromCollection, WithHeadings
 
     public function collection()
     {
-        $query = Student::leftJoin('academic_qualifications', 'academic_qualifications.student_id', '=', 'students.id')
+        $query = Student::where('students.is_payment', true)
+            ->leftJoin('academic_qualifications', 'academic_qualifications.student_id', '=', 'students.id')
             ->leftJoin('professional_experineces', 'professional_experineces.student_id', '=', 'students.id')
             /*   ->join('guest_infos', 'guest_infos.student_id', '=', 'students.id')*/
             ->leftJoin('gift_deliveries', 'gift_deliveries.student_id', '=', 'students.id')
-            ->leftJoin('payments', 'payments.student_id', '=', 'students.id')
-            ->where('students.is_payment', true)
+           /* ->leftJoin('payments', 'payments.student_id', '=', 'students.id')*/
+           ->distinct('students.registration_id')
             ->select(
                 'students.registration_id',
                 'students.name',
@@ -53,8 +54,8 @@ class UsersExport implements FromCollection, WithHeadings
                    'guest_infos.tshirt_size',
                    'gift_deliveries.delivery_type',*/
                 'gift_deliveries.delivery_type',
-                'payments.tran_id',
-                'payments.amount',
+           /*     'payments.tran_id',
+                'payments.amount',*/
 
 
             );
@@ -67,7 +68,7 @@ class UsersExport implements FromCollection, WithHeadings
         return ["Registration id", "Students name", "Nationality", "Email", "Phone",
             "Address", "zila", "Father name", "Mother name", "Nid no", "t-shirt size", "Qualification",
             "Department", "Session", "Reg no", "Roll no", "Passing year", "Profession",
-            "Designation", "Institute name", "Office phone", "Office_email", "Delivery address", "Transaction id", "Amount"];
+            "Designation", "Institute name", "Office phone", "Office_email", "Delivery address"/*, "Transaction id", "Amount"*/];
     }
 
 }

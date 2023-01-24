@@ -96,6 +96,9 @@ class AdminController extends Controller
         $query = Student::with("academicQualification", "profession", "guests", "gift", 'payments')
 
             ->orderBy('created_at', "DESC")->where('is_payment', true);
+
+
+
         if ($request['reg_no'] != null) {
             $query->where('registration_id', $request['reg_no']);
         }
