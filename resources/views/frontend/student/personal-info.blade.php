@@ -232,7 +232,7 @@
                         @if(\Illuminate\Support\Facades\Session::get('student_id') == null)
 
                             <div class="card-body">
-                                <form class="" method="post" action="/student/personal-info"
+                                <form class="" method="post" action="/student/registeration"
                                       enctype="multipart/form-data">
 
                                     @csrf

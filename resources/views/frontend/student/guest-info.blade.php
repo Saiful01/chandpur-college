@@ -260,6 +260,7 @@
                                                 <option value="স্বামী">স্বামী</option>
                                                 <option value="স্ত্রী">স্ত্রী</option>
                                                 <option value="সন্তান">সন্তান</option>
+                                                <option value="অন্যান্য">অন্যান্য</option>
 
                                             </select>
 

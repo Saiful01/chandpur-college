@@ -61,6 +61,18 @@ class UsersExport implements FromCollection, WithHeadings
             );
 
         return $query->get();
+
+
+
+        /*$users = Student::select('registration_id', 'name', 'nationality', 'email', 'phone', 'address',
+            'zila', 'father_name', 'mother_name', 'nid_no', 't_shirt_size')
+            ->with(['academicQualification' => function ($query) {
+                $query->select('program_name', 'department', 'session', 'reg_no', 'roll_no', 'passing_year');
+            }, 'profession' => function ($query) {
+                $query->select('profession', 'designation', 'office_phone', 'office_email');
+            }, 'gift' => function ($query) {
+                $query->select('delivery_type');
+            }])->where('is_payment', true)->get();*/
     }
 
     public function headings(): array

@@ -88,7 +88,7 @@ Route::any('/souvenir', [Controller::class, 'souvenir']);
 ##New Routes end
 
 Route::group(['prefix' => 'student'], function () {
-    Route::any('/personal-info', [Controller::class, 'personalInfo']);
+    Route::any('/registeration', [Controller::class, 'personalInfo']);
     Route::any('/personal-info-update', [Controller::class, 'personalInfoUpdate']);
     Route::any('/academic-info', [Controller::class, 'academicInfo']);
     Route::any('/academic-info-update', [Controller::class, 'academicInfoUpdate']);
