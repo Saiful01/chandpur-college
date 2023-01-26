@@ -74,6 +74,8 @@ class AdminController extends Controller
 
     public function AllStudent(Request $request)
     {
+
+
         $query = Student::with("academicQualification", "profession", "guests", "gift", 'payments')->orderBy('created_at', "DESC");
         if ($request['reg_no'] != null) {
             $query->where('registration_id', $request['reg_no']);
@@ -87,15 +89,26 @@ class AdminController extends Controller
         if ($request['payment'] != null) {
             $query->where('is_payment', $request['payment']);
         }
+
         $result = $query->paginate(50);
         return view('admin.student.all')->with('result', $result);
     }
 
     public function paymentStudent(Request $request)
     {
+
+
+
+         $program_name= $request['program_name'];
+         $passing_name= $request['passing_year'];
+         $session_name= $request['session'];
+
+
         $query = Student::with("academicQualification", "profession", "guests", "gift", 'payments')
 
             ->orderBy('created_at', "DESC")->where('is_payment', true);
+
+
 
 
 
@@ -110,6 +123,27 @@ class AdminController extends Controller
         }
         if ($request['payment'] != null) {
             $query->where('is_payment', $request['payment']);
+        }
+        if ($program_name != null) {
+
+
+            $query->whereHas('academicQualification', function ($query) use($program_name){
+                $query->where('program_name', 'like', '%'.$program_name.'%');
+            });
+        }
+        if ($passing_name != null) {
+
+
+            $query->whereHas('academicQualification', function ($query) use($passing_name){
+                $query->where('passing_year', 'like', '%'.$passing_name.'%');
+            });
+        }
+        if ($session_name != null) {
+
+
+            $query->whereHas('academicQualification', function ($query) use($session_name){
+                $query->where('session', 'like', '%'.$session_name.'%');
+            });
         }
         $result = $query->paginate(50);
         return view('admin.student.payment')->with('result', $result);

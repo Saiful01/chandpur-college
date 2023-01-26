@@ -42,40 +42,114 @@
                         <form action="/payment-students" method="get">
                             <div class="row">
 
-                                <div class="col-md-3">
+                                <div class="col-md-2">
                                     <input type="text" id="name" class="form-control" placeholder="Registration No"
                                            name="reg_no">
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-2">
 
                                     <input type="text" id="name" class="form-control" placeholder="Mobile Number"
                                            name="phone">
 
                                 </div>
-                                {{--
-                                                                <div class="col-md-3">
-
-                                                                    <input type="text" id="name" class="form-control" placeholder="Education Year"
-                                                                           name="education_year" >
-
-                                                                </div>--}}
                                 <div class="col-md-2">
 
                                     <input type="date" id="name" class="form-control" placeholder="Date"
                                            name="date">
 
                                 </div>
-                                {{--   <div class="col-md-2">
+                                <div class="col-md-2">
 
-                                       <select class="form-select" name="payment" id="country_id">
-                                           <option value="">Payment</option>
-                                           <option value="1">Yes</option>
-                                           <option value="0">No</option>
+                                    <select class="form-select"
+                                            name="program_name">
 
-                                       </select>
+                                        <option value="">Program name: *</option>
+                                        <option value="এইচএসসি">এইচএসসি</option>
+                                        <option value="অনার্স">অনার্স</option>
+                                        <option value="ডিগ্রি পাস">ডিগ্রি পাস</option>
+                                        <option value="মাস্টর্স">মাস্টর্স</option>
+                                    </select>
 
-                                   </div>--}}
-                                <div class="col-md-1">
+                                </div>
+
+                                <div class="col-md-2">
+
+                                    <input type="text" class="form-control" name="session"
+                                           placeholder="সেশন: ">
+
+                                </div>
+                                <div class="col-md-2">
+
+                                    <select class="form-select"
+                                            name="passing_year">
+
+                                        <option value="">পাশের সাল: *</option>
+                                        <option value="২০২২">২০২২</option>
+                                        <option value="২০২১">২০২১</option>
+                                        <option value="২০২০">২০২০</option>
+                                        <option value="২০১৯">২০১৯</option>
+                                        <option value="২০১৮">২০১৮</option>
+                                        <option value="২০১৭">২০১৭</option>
+                                        <option value="২০১৬">২০১৬</option>
+                                        <option value="২০১৫">২০১৫</option>
+                                        <option value="২০১৪">২০১৪</option>
+                                        <option value="২০১৩">২০১৩</option>
+                                        <option value="২০১২">২০১২</option>
+                                        <option value="২০১১">২০১১</option>
+                                        <option value="২০১০">২০১০</option>
+                                        <option value="২০০৯">২০০৯</option>
+                                        <option value="২০০৮">২০০৮</option>
+                                        <option value="২০০৭">২০০৭</option>
+                                        <option value="২০০৬">২০০৬</option>
+                                        <option value="২০০৫">২০০৫</option>
+                                        <option value="২০০৪">২০০৪</option>
+                                        <option value="২০০৩">২০০৩</option>
+                                        <option value="২০০২">২০০২</option>
+                                        <option value="২০০১">২০০১</option>
+                                        <option value="২০০০">২০০০</option>
+                                        <option value="১৯৯৯">১৯৯৯</option>
+                                        <option value="১৯৯৮">১৯৯৮</option>
+                                        <option value="১৯৯৭">১৯৯৭</option>
+                                        <option value="১৯৯৬">১৯৯৬</option>
+                                        <option value="১৯৯৫">১৯৯৫</option>
+                                        <option value="৯৯৪">১৯৯৪</option>
+                                        <option value="১৯৯৪">১৯৯৩</option>
+                                        <option value="১৯৯২">১৯৯২</option>
+                                        <option value="১৯৯১">১৯৯১</option>
+                                        <option value="১৯৯০">১৯৯০</option>
+                                        <option value="১৯৮৯">১৯৮৯</option>
+                                        <option value="১৯৮৮">১৯৮৮</option>
+                                        <option value="১৯৮৭">১৯৮৭</option>
+                                        <option value="১৯৮৬">১৯৮৬</option>
+                                        <option value="১৯৮৫">১৯৮৫</option>
+                                        <option value="১৯৮৪">১৯৮৪</option>
+                                        <option value="১৯৮৩">১৯৮৩</option>
+                                        <option value="১৯৮২">১৯৮২</option>
+                                        <option value="১৯৮১">১৯৮১</option>
+                                        <option value="১৯৮০">১৯৮০</option>
+                                        <option value="১৯৭৯">১৯৭৯</option>
+                                        <option value="১৯৭৮">১৯৭৮</option>
+                                        <option value="১৯৭৭">১৯৭৭</option>
+                                        <option value="১৯৭৬">১৯৭৬</option>
+                                        <option value="১৯৭৫">১৯৭৫</option>
+                                        <option value="১৯৭৪">১৯৭৪</option>
+                                        <option value="১৯৭৩">১৯৭৩</option>
+                                        <option value="১৯৭২">১৯৭২</option>
+                                        <option value="১৯৭১">১৯৭১</option>
+                                        <option value="১৯৭০">১৯৭০</option>
+                                        <option value="১৯৬৯">১৯৬৯</option>
+                                        <option value="১৯৬৮">১৯৬৮</option>
+                                        <option value="১৯৬৭">১৯৬৭</option>
+                                        <option value="১৯৬৬">১৯৬৬</option>
+                                        <option value="১৯৬৫">১৯৬৫</option>
+                                        <option value="১৯৬৪">১৯৬৪</option>
+
+
+                                    </select>
+
+                                </div>
+
+                                <div class="col-md-2 mt-2">
                                     <button type="submit" class="btn btn-success" id="edit-btn">Search</button>
                                 </div>
                             </div>
@@ -560,7 +634,8 @@
 
 
                                 <a href="/admin-student-edit/{{$item->id}}" class="btn btn-primary">Edit</a>
-                                <a href="/admin-student-new-ticket/{{$item->id}}" class="btn btn-danger mt-1" onclick="return confirm('Are you sure you want to generate new Ticket?');">New Ticket
+                                <a href="/admin-student-new-ticket/{{$item->id}}" class="btn btn-danger mt-1"
+                                   onclick="return confirm('Are you sure you want to generate new Ticket?');">New Ticket
                                     Download</a>
 
                             </td>
@@ -608,10 +683,4 @@
         @endonce
     @endpush
 
-    <!--
-
-
-
-
-
-@endsection -->
+@endsection
