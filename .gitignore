@@ -4,7 +4,7 @@
 /storage/*.key
 /vendor
 .env
-.*zip
+*.zip
 .env.backup
 .phpunit.result.cache
 Homestead.json
