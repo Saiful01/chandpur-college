@@ -12,6 +12,8 @@ class Student extends Model
     protected $guarded=[];
     public $timestamps=true;
 
+
+
     public function academicQualification()
     {
         return $this->hasOne(AcademicQualification::class);

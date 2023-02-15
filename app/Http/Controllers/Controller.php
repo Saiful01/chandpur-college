@@ -33,6 +33,12 @@ class Controller extends BaseController
     public function home()
     {
 
+        $query = GuestInfo::join('students', 'students.id', '=', 'guest_infos.student_id')
+            ->where('students.is_payment', true)->pluck('guest_infos.student_id');
+
+        Student::where('students.is_payment', true)->whereIn('id', $query)->get();
+
+
         Session::forget('student_id');
         return view("frontend.home.index");
 

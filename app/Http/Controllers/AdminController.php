@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 
+use App\Exports\ImportNonGuestUser;
 use App\Exports\UsersExport;
 use App\Models\AcademicQualification;
 use App\Models\Payment;
@@ -254,6 +255,10 @@ class AdminController extends Controller
     public function export()
     {
         return Excel::download(new UsersExport, 'users.xlsx');
+    }
+    public function nonGuestUserExport()
+    {
+        return Excel::download(new ImportNonGuestUser(), 'non_guest_users.xlsx');
     }
     public function exportData(Request $request)
     {

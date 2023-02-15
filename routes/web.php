@@ -56,6 +56,7 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('/payment', [AdminController::class, 'paymentData']);
     Route::get('/export-all-data', [AdminController::class, 'exportData']);
     Route::get('/export-user', [AdminController::class, 'export']);
+    Route::get('/export-non-guest-user', [AdminController::class, 'nonGuestUserExport']);
     Route::get('/admin-student-new-ticket/{id}', [AdminController::class, 'NewTicketDownload']);
 });
 

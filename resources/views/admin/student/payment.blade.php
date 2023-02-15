@@ -31,6 +31,7 @@
             </h3>
             <a href="/export-user" class="btn btn-danger">Export Students</a>
             <a href="/export-all-data" class="btn btn-info">Export Guest Data</a>
+            <a href="/export-non-guest-user" class="btn btn-primary">Export Non guest Student</a>
 
         </div>
         <div class="row">
